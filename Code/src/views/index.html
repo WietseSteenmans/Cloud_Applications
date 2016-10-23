@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+		<meta charset="utf-8">
+		<title>JarFish</title>
+		<meta name="generator" content="Bootply" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+		<link href="css/bootstrap.min.css" rel="stylesheet">
+		<link href="css/styles.css" rel="stylesheet">
+            <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+        <script type="text/javascript" src="/js/script.js"></script>
+	</head>
+	<body ng-app="Jarfish">
+<nav class="navbar navbar-default" id="navbar">
+  <div class="container-fluid">
+    <div class="navbar-header">
+    </div>
+    <ul class="nav navbar-nav">
+      <li class="active"><a href="#">Home</a></li>
+      <li><a href="index.html">Multiple-Choice</a></li>
+      <li><a href="yesno.html">Yes/No</a></li>
+      <li><a href="mijnlessen.html">MijnLessen</a></li>
+      <li><a href="#">Playbooks</a></li>
+    </ul>
+  </div>
+</nav>
+
+
+<!--     <div ng-controller="SendCtrl">
+
+Vaknaam: <input type="text" ng-model="Vaknaam"><br>
+Onderwerp: <input type="text" ng-model="Onderwerp"><br>
+Vraag : <input type="text" ng-model="Vraag"><br>
+Antwoord1 : <input type="text" ng-model='Antwoord1'><br>
+Antwoord2 : <input type="text" ng-model='Antwoord2'><br>
+Antwoord3 : <input type="text" ng-model='Antwoord3'><br>
+Juistantwoord : <input type="text" ng-model='Juistantwoord'>
+<br>
+<button ng-click="sendData()">Les Toevoegen</button>
+</div> -->
+
+                  
+<!--           <div class="row">    
+            <br>
+            <div class="col-md-2 col-sm-3 text-center">
+              Sign In
+                <form name="signInForm"
+                      action="/auth/signin" 
+                      method="post">
+                  User Name: <input name="userName" id="userName"> <br/>
+                  Password: <input name="password" id="password"> <br />
+                  <input type="submit" value="Sign In">
+                
+                </form>
+            </div>
+            <div class="col-md-10 col-sm-9">
+              Sign Up
+                <form name="signUpForm"
+                      action="/auth/signup" 
+                      method="post">
+                  User Name: <input name="userName" id="userName"> <br/>
+                  Password: <input name="password" id="password"> <br />
+                  <input type="submit" value="Sign up">
+                
+                </form>
+            </div>
+          </div> -->
+          <div class="container" ng-controller="MultipleChoiceCtrl">
+      <h1>Creat New Multiple-Choice Question.</h1>
+      <hr>
+      <form name="newLesForm">
+        <fieldset>
+          <label for="Coursename">Course Name:</label>
+          <input id="Coursename" type="text" required ng-model="Coursename" placeholder="Name of your Course..." />
+          <label for="eventDate">Question:</label>
+          <div style="position:relative">
+              <!-- <input id="Question" type="text" ng-model="Question" placeholder="Your Question..."/> -->
+              <textarea id="Question" type="text" required ng-model="Question" placeholder="Your Question..."></textarea>
+          </div>
+                    <label>Answer 1:</label>
+          <input id="eventTime" type="text" required ng-model="Answer1" placeholder="Answer 1..." />
+                    <label >Answer 2:</label>
+          <input id="eventTime" type="text" required ng-model="Answer2" placeholder="Answer 2..." />
+                    <label>Answer 3:</label>
+          <input id="eventTime" type="text" required ng-model="Answer3" placeholder="Answer 3..." />
+                    <label for="eventTime">Right Answer:</label>
+          <input id="eventTime" type="text" required ng-model="RightAnswer" placeholder="Right Answer..." />
+          <br />
+        </fieldset>
+
+        <br />
+
+        <button type="submit" ng-click="savemultiple()" class="btn btn-primary">Save</button>
+        <button type="button" ng-click="cancelEvent()" class="btn btn-default">Cancel</button>
+      </form>
+        </div>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <script src="js/bootstrap.min.js"></script>
+        
+	</body>
+</html>
