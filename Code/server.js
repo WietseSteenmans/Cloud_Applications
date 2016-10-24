@@ -92,7 +92,7 @@ app.post("/MultipleChoiceLessen",function(req,res){
     Answer2: req.body.Antwoord2,
     Answer3: req.body.Antwoord3,
     RightAnswer: req.body.RightAnswer
-  };
+    };
 
   console.log(multiplechoiceles);
 
@@ -129,6 +129,7 @@ app.post("/YesNoLessen",function(req,res){
 });
 
 app.get("/GetLessen", function(req, res){
+	console.log("Got Request");
 	var results = [];
 	mongo.connect(url, function(err, db){
 		assert.equal(null, err);
@@ -136,11 +137,23 @@ app.get("/GetLessen", function(req, res){
 		cursor.forEach(function(doc, err){
 			assert.equal(null, err);
 			results.push(doc);
-		}, function(){
+		},function(){
+			db.close();
+		});
+	});
+
+	mongo.connect(url, function(err, db){
+		assert.equal(null, err);
+		var cursor = db.collection('YesNoLessen').find();
+		cursor.forEach(function(doc, err){
+			assert.equal(null, err);
+			results.push(doc);
+		},function(){
 			db.close();
 			res.json(results);
 		});
 	});
+
 });
 
 //  app.post('/Register', function(req, res){

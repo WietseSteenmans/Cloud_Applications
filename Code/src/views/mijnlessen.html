@@ -38,7 +38,8 @@
       <tr ng-repeat="x in data">
         <td>{{x.Coursename}} {{x.Vaknaam}}</td>
         <td>{{x.Question}} {{x.Vraag}}</td>
-        <td>{{x.RightAnswer}} {{x.Choice}}</td>
+        <td>{{x.RightAnswer}} {{x.Answer}}</td>
+        <td><button ng-click="delete()" type="button" value="button">X</button></td>
       </tr>
     </tbody>
   </table>

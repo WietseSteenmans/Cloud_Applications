@@ -40,7 +40,7 @@ myApp.controller("YesNoController", function($scope,$http){
   $scope.saveyesno = function() {
 
      var dataObj = {
-      Vaknaam : $scope.Coursename,
+      Vaknaam : $scope.Vaknaam,
       Question : $scope.Vraag,
       Answer : $scope.Choice
      };
@@ -59,13 +59,21 @@ myApp.controller("YesNoController", function($scope,$http){
 
 myApp.controller("LessenController", function($scope,$http){
 
-  var res = $http.get('http://localhost:3000/GetLessen')
+  var res = $http.get('http://localhost:3000/GetLessen');
+
+  var lessData = [];
 
   res.success(function(data, status, headers, config){
     $scope.data = data;
     console.log($scope.data);
     console.log(JSON.stringify({data: data}));
+    lessData.push($scope.data);
   });
+
+  $scope.delete = function(){
+    console.log(lessData[0]);
+  }
+
 });
 
 
