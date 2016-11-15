@@ -86,7 +86,7 @@ var smtpTransport = nodemailer.createTransport({
 
 //Post for Db
 app.post("/MultipleChoiceLessen",function(req,res){
-	
+
 	var multiplechoiceles = {
     Coursename: req.body.Coursename,
     Question: req.body.Question,
@@ -110,7 +110,7 @@ app.post("/MultipleChoiceLessen",function(req,res){
 
 
 app.post("/YesNoLessen",function(req,res){
-	
+
 	var yesnoles = {
     Coursename: req.body.Coursename,
     Question: req.body.Question,
@@ -132,7 +132,7 @@ app.post("/YesNoLessen",function(req,res){
 
 
 app.get("/GetLessen", function(req, res){
-	console.log("Got Request");
+  console.log("Got request");
 	var results = [];
 	mongo.connect(url, function(err, db){
 		assert.equal(null, err);
@@ -199,7 +199,7 @@ app.post("/ActivateLessen", function(req, res){
       originalData = results;
     });
   });
-  console.log(req.body.vak);  
+  console.log(req.body.vak);
   var Vragen = req.body.vak;
   var filtered = _.where(originalData, { Coursename: Vragen });
   res.json(filtered);
