@@ -175,8 +175,14 @@ app.delete("/deleteLes", function(req, res){
 
 })
 
+
+//Krijg Course aan, laat eerstre vraag zien en dan volgende enz...
 app.post("/ActivateLessen", function(req, res){
-  res.send(req.body);
+  console.log(req.body);  
+  var Vragen = req.body;
+  var filtered = _.where(originalData, { Coursename: Vragen });
+  res.json(filtered);
+  console.log(filtered);
 })
 
 //  app.post('/Register', function(req, res){

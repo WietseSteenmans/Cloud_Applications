@@ -149,8 +149,10 @@ myApp.controller("LessenController", function($scope,$http){
 
     var res = $http.post('http://localhost:3000/deleteLes');
 
-    // res.success(function(data,status,headers,config){
-    // })
+    res.success(function(data,status,headers,config){
+      $scope.data = data;
+      console.log($scope.data);
+    })
   }
 
 });

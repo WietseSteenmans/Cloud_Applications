@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <title>JarFish</title>
+    <meta name="generator" content="Bootply" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/styles.css" rel="stylesheet">
+            <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+
+  </head>
+  <body ng-app="Jarfish">
+<nav class="navbar navbar-default" id="navbar">
+  <div class="container-fluid">
+    <div class="navbar-header">
+    </div>
+    <ul class="nav navbar-nav">
+      <li class="active"><a href="#">Home</a></li>
+      <li><a href="index.html">New Question</a></li>
+      <li><a href="mijnlessen.html">MijnLessen</a></li>
+      <li><a href="#">Playbooks</a></li>
+    </ul>
+  </div>
+</nav>
+<div>
+<div ng-controller="LessenController">
+
+<div id="coursediv">
+  <div data-ng-repeat="x in Data"><a ng-click="send(x)"><h1>{{x}}</h1></a></div>
+</div>
+
+<div id="vragenDiv">
+    <table class="table">
+    <thead>
+      <tr>
+        <th>Vak</th>
+        <th>Vraag</th>
+        <th>Juist Antwoord</th>
+      </tr>
+    </thead>
+    <tbody >
+      <tr ng-repeat="x in response">
+        <td>{{x.Coursename}}</td>
+        <td>{{x.Question}}</td>
+        <td>{{x.Answer}} {{x.RightAnswer}}</td>
+        <td><button ng-click="delete(response, $index)" type="button" value="button">X</button></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+</div>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <script src="js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="/js/script.js"></script>
+  </body>
+</html>
