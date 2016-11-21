@@ -4,3 +4,19 @@
 .navbar {
   margin-top: 20px
 }
+
+#MultipleChoice {
+	display: none;
+}
+
+#YesNo {
+    display: none;
+}
+
+#coursediv {
+	display: block;
+} 
+
+#vragenDiv {
+	display: none;
+}

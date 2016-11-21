@@ -1,6 +1,41 @@
 var myApp = angular.module('Jarfish', []);
 
-myApp.controller("MultipleChoiceCtrl", function($scope,$http){
+myApp.controller("QuestionCtrl", function($scope,$http){
+
+
+     $("select").change(function () {
+
+    var index = "";
+
+    index = parseInt($("select option:selected").val());
+
+    if(index ==1){
+     $("#MultipleChoice").show();
+     $("#YesNo").hide();
+    }
+    else if (index ==2) {
+     $("#MultipleChoice").hide();
+     $("#YesNo").show();
+    }
+    else{
+     $("#MultipleChoice").hide();
+     $("#YesNo").hide();
+    }
+
+
+});
+
+  //Clearing Textboxes
+  $scope.anotherQuestion = function(){
+
+  document.getElementById('Question').value = "";
+  document.getElementById('Questionyn').value = "";
+  document.getElementById('answerinput1').value = "";
+  document.getElementById('answerinput2').value = "";
+  document.getElementById('answerinput3').value = "";
+  document.getElementById('rightAnswer').value = "";
+
+  }
 
   $scope.savemultiple = function() {
 
@@ -23,10 +58,6 @@ myApp.controller("MultipleChoiceCtrl", function($scope,$http){
      });
   };
 
-});
-
-myApp.controller("YesNoController", function($scope,$http){
-
 
   $scope.Choices = [{
     value: 'Yes',
@@ -40,12 +71,12 @@ myApp.controller("YesNoController", function($scope,$http){
   $scope.saveyesno = function() {
 
      var dataObj = {
-      Vaknaam : $scope.Vaknaam,
+      Coursename : $scope.Coursename,
       Question : $scope.Vraag,
       Answer : $scope.Choice
      };
 
-     console.log(dataObj);
+     console.log(dataObj.Coursename);
 
      var res = $http.post('http://localhost:3000/YesNoLessen', dataObj)
 
@@ -55,81 +86,93 @@ myApp.controller("YesNoController", function($scope,$http){
      });
   };
 
+
 });
 
 myApp.controller("LessenController", function($scope,$http){
 
   var res = $http.get('http://localhost:3000/GetLessen');
 
-  var lessData = [];
+  var CourseArray = [];
 
   res.success(function(data, status, headers, config){
     $scope.data = data;
     console.log($scope.data);
-    console.log(JSON.stringify({data: data}));
-    lessData.push($scope.data);
+    var lessData = $scope.data;
+    for (var i = 0; i <= lessData.length -1; i++) {
+      CourseArray.push(lessData[i].Coursename);
+      CourseArray.sort();
+    }
+   var unique = CourseArray.filter(function(elem, index, self) {
+    return index == self.indexOf(elem);
+      })
+    $scope.Data = unique;
+    console.log(typeof $scope.Data);
   });
 
-  $scope.delete = function(){
-    console.log(lessData[0]);
+
+  $scope.send = function (course){
+    
+      var div = document.getElementById('coursediv');
+      div.style.display = "none";
+      var divv = document.getElementById('vragenDiv');
+      divv.style.display = "block";
+      var dataToSend = JSON.stringify({
+          "vak" : course
+      });
+
+      var config = {
+          headers: {
+              'Content-Type': 'application/json'
+          }
+      }
+
+      $http.post("/Vragen", dataToSend, config)
+        .success(function (data,status,headers,config) {
+            //console.log("recieved");
+            $scope.response = data;
+            // for (var i = 0; i <= $scope.response.length; i++) {
+            //     SharedDataService.addCourse($scope.response[i]);
+            // }
+            //SharedDataService.addCourse($scope.response);
+            console.log($scope.response);
+        })
+        .error(function (data,status,header,config) {
+            console.log("Failed " + data);
+            $scope.response = data;
+        })
+
+  }
+
+  $scope.delete = function(array, index){
+    array.splice(index, 1);
+
+    var res = $http.post('http://localhost:3000/deleteLes');
+
+    // res.success(function(data,status,headers,config){
+    // })
   }
 
 });
 
+// myApp.service('SharedDataService', function () {
+//       var Course = [];
 
+//       var addCourse = function(vak) {
+//       Course.push(vak);
+//       }
+//       var getCourse = function() {
+//       return Course;
+//       }
 
-// myApp.controller("LoginCtrl", function($scope,$http){
-
-
-
-//   // var res = $http.get('http://localhost:3000/Storage')
-
-//   // res.success(function(data, status, headers, config){
-//   //   $scope.testdata = data;
-//   //   JSON.stringify($scope.testdata);
-//   //   //console.log(JSON.stringify({data: data}));
-//   //   console.log($scope.testdata);
-//   // })
-
-
-
-// $scope.Login = function(){
-
-// var loginInfo =  {
-//   Username : $scope.Username,
-//   Password : $scope.Password
-// };
-
-
-// var res = $http.post('http://localhost:3000/Login', loginInfo)
-
-// res.success(function(data, status, headers, config){
-//   $scope.data = data;
-//   console.log($scope.data);
-// })
-
-// }
-
+//       return {addCourse: addCourse, getCourse: getCourse};
 // });
 
 
-// myApp.controller("RegisterCtrl", function($scope,$http){
-
-//   $scope.Register = function(){
-
-//   var RegisterInfo = {
-//     Email : $scope.Email,
-//     Username : $scope.Username,
-//     Password : $scope.Password
-//   };
-
-//   var res = $http.post('http://localhost:3000/Register', RegisterInfo)
-
-//   res.success(function(data, status, headers, config){
-//     $scope.data = data;
-//     console.log($scope.data);
-//   });
-
-//   }
-
+// myApp.controller("Question", function($scope,SharedDataService) {
+//   //console.log("I'm HERE");
+//   $scope.vragen = SharedDataService.getCourse();
+//   console.log($scope.vragen);
+//   //console.log(vragen);
+//  // $scope.response = vragen;
 // });

@@ -10,10 +10,12 @@ var mongo = require('mongodb').MongoClient;
 var assert =require('assert');
 var session = require('express-session');
 var nodemailer = require("nodemailer");
+var _ = require("underscore");
 
 var app = express();
 
 var url = 'mongodb://localhost:27017/jarfish';
+var originalData;
 
 // var nav = [{
 //     Link: '/Lessen',
@@ -110,7 +112,7 @@ app.post("/MultipleChoiceLessen",function(req,res){
 app.post("/YesNoLessen",function(req,res){
 	
 	var yesnoles = {
-    Vaknaam: req.body.Vaknaam,
+    Coursename: req.body.Coursename,
     Question: req.body.Question,
     Answer: req.body.Answer.value,
   };
@@ -127,6 +129,7 @@ app.post("/YesNoLessen",function(req,res){
   });
 
 });
+
 
 app.get("/GetLessen", function(req, res){
 	console.log("Got Request");
@@ -151,10 +154,30 @@ app.get("/GetLessen", function(req, res){
 		},function(){
 			db.close();
 			res.json(results);
+      originalData = results;
 		});
 	});
 
 });
+
+
+
+
+
+app.post("/Vragen", function (req,res) {
+    var Vragen = req.body.vak;
+    var filtered = _.where(originalData, { Coursename: Vragen });
+    res.json(filtered);
+
+});
+
+app.delete("/deleteLes", function(req, res){
+
+})
+
+app.post("/ActivateLessen", function(req, res){
+  res.send(req.body);
+})
 
 //  app.post('/Register', function(req, res){
 //  	console.log(req.body);
