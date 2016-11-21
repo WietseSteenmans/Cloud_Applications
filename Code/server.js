@@ -161,6 +161,35 @@ app.get("/GetLessen", function(req, res){
 });
 
 
+var getdata = function(){
+    var results = [];
+  mongo.connect(url, function(err, db){
+    assert.equal(null, err);
+    var cursor = db.collection('MultipleChoiceLessen').find();
+    cursor.forEach(function(doc, err){
+      assert.equal(null, err);
+      results.push(doc);
+    },function(){
+      db.close();
+    });
+  });
+
+  mongo.connect(url, function(err, db){
+    assert.equal(null, err);
+    var cursor = db.collection('YesNoLessen').find();
+    cursor.forEach(function(doc, err){
+      assert.equal(null, err);
+      results.push(doc);
+    },function(){
+      db.close();
+      originalData = results;
+    });
+  });
+}
+
+
+
+
 
 
 
@@ -178,6 +207,7 @@ app.delete("/deleteLes", function(req, res){
 
 //Krijg Course aan, laat eerstre vraag zien en dan volgende enz...
 app.post("/ActivateLessen", function(req, res){
+  getdata();
   console.log(req.body.Coursename);  
   var Vragen = req.body.Coursename;
   var filtered = _.where(originalData, { Coursename: Vragen });
