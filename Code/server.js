@@ -161,7 +161,21 @@ app.get("/GetLessen", function(req, res){
 });
 
 
-var getdata = function(){
+
+app.post("/Vragen", function (req,res) {
+    var Vragen = req.body.vak;
+    var filtered = _.where(originalData, { Coursename: Vragen });
+    res.json(filtered);
+
+});
+
+app.delete("/deleteLes", function(req, res){
+
+})
+
+
+//Krijg Course aan, laat eerstre vraag zien en dan volgende enz...
+app.post("/ActivateLessen", function(req, res){
     var results = [];
   mongo.connect(url, function(err, db){
     assert.equal(null, err);
@@ -185,34 +199,10 @@ var getdata = function(){
       originalData = results;
     });
   });
-}
-
-
-
-
-
-
-
-app.post("/Vragen", function (req,res) {
-    var Vragen = req.body.vak;
-    var filtered = _.where(originalData, { Coursename: Vragen });
-    res.json(filtered);
-
-});
-
-app.delete("/deleteLes", function(req, res){
-
-})
-
-
-//Krijg Course aan, laat eerstre vraag zien en dan volgende enz...
-app.post("/ActivateLessen", function(req, res){
-  getdata();
-  console.log(req.body.Coursename);  
-  var Vragen = req.body.Coursename;
+  console.log(req.body.vak);  
+  var Vragen = req.body.vak;
   var filtered = _.where(originalData, { Coursename: Vragen });
   res.json(filtered);
-  console.log(filtered);
 })
 
 //  app.post('/Register', function(req, res){
