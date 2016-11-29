@@ -204,6 +204,11 @@ app.post("/ActivateLessen", function(req, res){
       res.json(filtered);
     });
   });
+});
+
+app.post("/Results", function(req,res){
+  console.log(req.body);
+  res.json(req.body);
 })
 
 //  app.post('/Register', function(req, res){
