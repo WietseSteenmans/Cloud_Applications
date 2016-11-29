@@ -65,7 +65,7 @@ myApp.controller("QuestionCtrl", function($scope,$http){
   }, {
     value: 'No',
     label: 'No'
-  }];   
+  }];
 
 
   $scope.saveyesno = function() {
@@ -112,7 +112,7 @@ myApp.controller("LessenController", function($scope,$http){
 
 
   $scope.send = function (course){
-    
+
       var div = document.getElementById('coursediv');
       div.style.display = "none";
       var divv = document.getElementById('vragenDiv');
@@ -179,9 +179,9 @@ myApp.controller("LessenController", function($scope,$http){
 //  // $scope.response = vragen;
 // });
 
-myApp.controller("Activeles", function($scope.$http){
+myApp.controller("Activeles", function($scope,$http){
 
-  var res = $http.post('http://localhost:3000/ActivateLessen');
+  var res = $http.get('http://localhost:3000/dataFilter');
 
   res.success(function(data, status, headers, config){
     $scope.Activelesdata = data;
