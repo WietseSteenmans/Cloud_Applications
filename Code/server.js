@@ -133,6 +133,7 @@ app.post("/YesNoLessen",function(req,res){
 
 app.get("/GetLessen", function(req, res){
   console.log("Got request");
+  console.log("this is a small git test");
 	var results = [];
 	mongo.connect(url, function(err, db){
 		assert.equal(null, err);
