@@ -1,5 +1,5 @@
 .modal-footer {   border-top: 0px; }
- 
+
 
 .navbar {
   margin-top: 20px
@@ -15,8 +15,18 @@
 
 #coursediv {
 	display: block;
-} 
+}
 
 #vragenDiv {
 	display: none;
+}
+
+#wrapper{
+
+}
+#graphDisplay{
+
+}
+#answerOptions{
+  
 }
