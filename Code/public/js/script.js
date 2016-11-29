@@ -178,3 +178,13 @@ myApp.controller("LessenController", function($scope,$http){
 //   //console.log(vragen);
 //  // $scope.response = vragen;
 // });
+
+myApp.controller("Activeles", function($scope.$http){
+
+  var res = $http.post('http://localhost:3000/ActivateLessen');
+
+  res.success(function(data, status, headers, config){
+    $scope.Activelesdata = data;
+    console.log($scope.Activelesdata);
+  })
+})

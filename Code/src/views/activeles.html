@@ -25,11 +25,11 @@
   </div>
 </nav>
 <div>
-<div ng-controller="LessenController">
+<div ng-controller="Activeles">
 
-<div id="coursediv">
+<!-- <div id="coursediv">
   <div data-ng-repeat="x in Data"><a ng-click="send(x)"><h1>{{x}}</h1></a></div>
-</div>
+</div> -->
 
 <div id="vragenDiv">
     <table class="table">
@@ -41,7 +41,7 @@
       </tr>
     </thead>
     <tbody >
-      <tr ng-repeat="x in response">
+      <tr ng-repeat="x in Activelesdata">
         <td>{{x.Coursename}}</td>
         <td>{{x.Question}}</td>
         <td>{{x.Answer}} {{x.RightAnswer}}</td>
