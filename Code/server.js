@@ -198,12 +198,12 @@ app.post("/ActivateLessen", function(req, res){
     },function(){
       db.close();
       originalData = results;
+      console.log(req.body.CourseName);
+      var Vragen = req.body.CourseName;
+      var filtered = _.where(originalData, { Coursename: Vragen });
+      res.json(filtered);
     });
   });
-  console.log(req.body.vak);
-  var Vragen = req.body.vak;
-  var filtered = _.where(originalData, { Coursename: Vragen });
-  res.json(filtered);
 })
 
 //  app.post('/Register', function(req, res){
