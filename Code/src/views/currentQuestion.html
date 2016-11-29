@@ -1,0 +1,68 @@
+ <!DOCTYPE html>
+ <html lang="en">
+
+<head>
+     <meta charset="UTF-8">
+     <title>TITLE</title>
+     <meta name="description" content="DESCRIPTION">
+    <link href="css/styles.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.1.4/Chart.min.js"></script>
+ </head>
+
+ <body>
+   <h1>Current Lesson: Biologie</h1>
+   <h2>Question?</h2>
+
+<div id="Wrapper">
+     <div id="answerOptions">
+       <label>Answer 1</label>
+       <label>Answer 2</label>
+       <label>Answer 3</label>
+       <label>Answer 4</label>
+     </div>
+
+     <div id="graphDisplay">
+     <!-- test Graph -->
+     	<canvas id="myChart"></canvas>
+     	<script>
+     	var ctx = document.getElementById('myChart').getContext('2d');
+     	var myChart = new Chart(ctx, {
+     	  type: 'bar',
+     	  data: {
+     	    labels: ['Answer 1'],
+     	    datasets: [{
+     	      label: 'apples',
+     	      data: [8],
+     	      backgroundColor: "rgba(153,255,51,0.4)"
+     	    }, {
+     	      label: 'oranges',
+     	      data: [4],
+     	      backgroundColor: "rgba(255,153,0,0.4)"
+     	    },{
+     				label: 'Answer 3',
+     				data: [1],
+     				backgroundColor:"rgba(0,153,255,0.4)"
+     			},{
+     				label: 'Answer 3',
+     				data: [5],
+     				backgroundColor:"rgba(153,0,255,0.4)"
+     			}]
+     	  },
+     		options: {
+     	        scales: {
+     	            yAxes: [{
+     	                ticks: {
+     	                    max: 10,
+     	                    min: 0,
+     	                    stepSize: 1
+     	                }
+     	            }]
+     	        }
+     	    }
+     	});
+     </script>
+   </div>
+</div>
+ </body>
+
+ </html>
