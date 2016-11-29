@@ -174,6 +174,7 @@ app.delete("/deleteLes", function(req, res){
 
 })
 
+var filteredData = [];
 
 //Krijg Course aan, laat eerstre vraag zien en dan volgende enz...
 app.post("/ActivateLessen", function(req, res){
@@ -201,7 +202,9 @@ app.post("/ActivateLessen", function(req, res){
       console.log(req.body.CourseName);
       var Vragen = req.body.CourseName;
       var filtered = _.where(originalData, { Coursename: Vragen });
-      res.json(filtered);
+
+      filteredData = filtered;
+      //res.json(filtered);
     });
   });
 });
@@ -211,6 +214,9 @@ app.post("/Results", function(req,res){
   res.json(req.body);
 })
 
+app.get('/dataFilter', function(req, res){
+  res.json(filteredData);
+})
 //  app.post('/Register', function(req, res){
 //  	console.log(req.body);
 //  	dbaccount.accountstorage.insert(req.body,function(err,doc){
