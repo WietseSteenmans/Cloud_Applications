@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+		<meta charset="utf-8">
+		<title>JarFish</title>
+		<meta name="generator" content="Bootply" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+		<link href="css/bootstrap.min.css" rel="stylesheet">
+		<link href="css/styles.css" rel="stylesheet">
+            <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+        <script type="text/javascript" src="/js/script.js"></script>
+
+	</head>
+	<body ng-app="Jarfish">
+<nav class="navbar navbar-default" id="navbar">
+  <div class="container-fluid">
+    <div class="navbar-header">
+    </div>
+    <ul class="nav navbar-nav">
+      <li class="active"><a href="#">Home</a></li>
+      <li><a href="index.html">New Question</a></li>
+      <li><a href="mijnlessen.html">MijnLessen</a></li>
+      <li><a href="#">Playbooks</a></li>
+    </ul>
+  </div>
+</nav>
+
+   <div class="container" ng-controller="QuestionCtrl">
+      <h1>Create New Question!</h1>
+      <hr>
+
+  <select>
+    <option value="0">Type of Question ?</option>
+    <option value="1">Multiple Choice</option>
+    <option value="2">Yes/No</option>
+</select>
+      <form name="newLesForm">
+      <div class="container" id="MultipleChoice">
+        <fieldset>
+          <label for="Coursename">Course Name:</label>
+          <input id="Coursename" type="text" required ng-model="Coursename" placeholder="Name of your Course..." />
+          <label for="eventDate">Question:</label>
+          <div style="position:relative">
+              <textarea id="Question" type="text" required ng-model="Question" placeholder="Your Question..."></textarea>
+          </div>
+                    <label>Answer 1:</label>
+          <input id="answerinput1" type="text" required ng-model="Answer1" placeholder="Answer 1..." />
+                    <label >Answer 2:</label>
+          <input id="answerinput2" type="text" required ng-model="Answer2" placeholder="Answer 2..." />
+                    <label>Answer 3:</label>
+          <input id="answerinput3" type="text" required ng-model="Answer3" placeholder="Answer 3..." />
+                    <label for="eventTime">Right Answer:</label>
+          <input id="rightAnswer" type="text" required ng-model="RightAnswer" placeholder="Right Answer..." />
+          <br />
+        </fieldset>
+
+
+        <br />
+
+        <button type="submit" ng-click="savemultiple()" class="btn btn-primary">Save</button>
+        <button type="button" ng-click="anotherQuestion()" class="btn btn-default">Another Question</button>
+      </form>
+        </div>
+
+        <div class="container" id="YesNo">
+        <form name="newLesForm">
+        <fieldset>
+          <label for="Coursename">Course Name:</label>
+          <input id="Coursename" type="text" required ng-model="Coursename" placeholder="Name of your Course..." />
+          <label for="eventDate">Question:</label>
+          <div style="position:relative">
+              <textarea id="Questionyn" type="text" required ng-model="Vraag" placeholder="Your Question..."></textarea>
+          </div>
+                    <label for="eventTime">Right Answer:</label>
+         <select class="selectpicker" ng-model="Choice" ng-options="Choice as Choice.label for Choice in Choices"></select>
+          <br />
+        </fieldset>
+        <br />
+        <button type="submit" ng-click="saveyesno()" class="btn btn-primary" id="btn">Save</button>
+        <button type="button" ng-click="anotherQuestion()" class="btn btn-default" id="btn">Another Question</button>
+      </form>
+      </div>
+</div>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <script src="js/bootstrap.min.js"></script>
+	</body>
+</html>
