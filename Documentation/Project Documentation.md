@@ -120,33 +120,33 @@ We hebben twee soorten mockups gemaakt omdat er gewerkt wordt met een app en web
 ### Web Mockup
 
 Wanneer iemand surft naar de website zal die een unieke QR-code te zien krijgen. Wanneer deze gescand wordt met de app zal de websessie met de app gesynct worden.
-![alttext](https://raw.githubusercontent.com/WietseSteenmans/Cloud_Applications/master/Images/QrCode-MockUp.png "QRcode")
+![alttext](https://raw.githubusercontent.com/WietseSteenmans/Cloud_Applications/master/Documentation/Images/QrCode-MockUp.png "QRcode")
 
 Na de eerste stap zal er een laadscherm getoond worden totdat de twee devices verbonden zijn.
-![alttext](https://raw.githubusercontent.com/WietseSteenmans/Cloud_Applications/master/Images/Connecting-MockUp.jpg "Connecting")
+![alttext](https://raw.githubusercontent.com/WietseSteenmans/Cloud_Applications/master/Documentation/Images/Connecting-MockUp.jpg "Connecting")
 
 Via de gsm wordt er genavigeerd en zullen de geselecteerde vragen getoond worden. Het is natuurlijk ook mogelijk om met knoppen op de website te navigeren. Hier onder twee voorbeelden:
 
 1. Ja/Neen vraag
-![alttext](https://raw.githubusercontent.com/WietseSteenmans/Cloud_Applications/master/Images/Yes-NoWeb-MockUp.png "Yes-No")
+![alttext](https://raw.githubusercontent.com/WietseSteenmans/Cloud_Applications/master/Documentation/Images/Yes-NoWeb-MockUp.png "Yes-No")
 2. Multiple choice vraag
-![alttext](https://raw.githubusercontent.com/WietseSteenmans/Cloud_Applications/master/Images/MultipleChoiceWeb-MockUp.png "MultipleChoice")
+![alttext](https://raw.githubusercontent.com/WietseSteenmans/Cloud_Applications/master/Documentation/Images/MultipleChoiceWeb-MockUp.png "MultipleChoice")
 
 ### App Mockup
 De app zal gebruikt worden als afstandsbediening voor de website.
 Eerst zal de QR-code gescand worden. Dan zal er een sessie worden gestart en het volgende keuze scherm getoond worden.
-![alttext](https://raw.githubusercontent.com/WietseSteenmans/Cloud_Applications/master/Images/MainMobile-MockUp.png "MultipleChoice")
+![alttext](https://raw.githubusercontent.com/WietseSteenmans/Cloud_Applications/master/Documentation/Images/MainMobile-MockUp.png "MultipleChoice")
 
 Bij het selecteren van real-time zal je keuze krijgen tussen een aantal prefabs.
-![alttext](https://raw.githubusercontent.com/WietseSteenmans/Cloud_Applications/master/Images/RealTime-Mockup.png "RealTime Menu")
+![alttext](https://raw.githubusercontent.com/WietseSteenmans/Cloud_Applications/master/Documentation/Images/RealTime-Mockup.png "RealTime Menu")
 
 Hierop volgen de keuze schermen:
 1. Yes/No Question:
-![alttext](https://raw.githubusercontent.com/WietseSteenmans/Cloud_Applications/master/Images/Yes-No-MockUp.png "Yes-No")
+![alttext](https://raw.githubusercontent.com/WietseSteenmans/Cloud_Applications/master/Documentation/Images/Yes-No-MockUp.png "Yes-No")
 2. MultipleChoice:
-![alttext](https://raw.githubusercontent.com/WietseSteenmans/Cloud_Applications/master/Images/MultipleChoice-MockUp.png "MultipleChoice")
+![alttext](https://raw.githubusercontent.com/WietseSteenmans/Cloud_Applications/master/Documentation/Images/MultipleChoice-MockUp.png "MultipleChoice")
 
 Bij het selecteren van playbooks kan je vervolgens kiezen tussen je eigen playbooks.
-![alttext](https://raw.githubusercontent.com/WietseSteenmans/Cloud_Applications/master/Images/Playbooks-MockUp.png "Playbooks")
+![alttext](https://raw.githubusercontent.com/WietseSteenmans/Cloud_Applications/master/Documentation/Images/Playbooks-MockUp.png "Playbooks")
 ## Links
 - https://github.com/WietseSteenmans/Cloud_Applications
