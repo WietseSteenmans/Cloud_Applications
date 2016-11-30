@@ -1,0 +1,87 @@
+ <!DOCTYPE html>
+ <html lang="en">
+
+<head>
+     <meta charset="UTF-8">
+     <title>TITLE</title>
+     <meta name="description" content="DESCRIPTION">
+    <link href="css/styles.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.1.4/Chart.min.js"></script>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+ </head>
+
+ <body>
+<div id="Wrapper" class="container">
+  <div class ="row">
+    <div class = "col-xs-8 col-xs-push-4">
+      <h1>Current Lesson: Biologie</h1>
+    </div>
+  </div>
+
+  <div class = "row">
+    <div class = "col-xs-7 col-xs-push-5">
+      <h2>Question?</h2>
+    </div>
+ </div>
+
+  <div class="row">
+     <div id="answerOptions" class="col-xs-1">
+       <label>Answer 1</label>
+       <label>Answer 2</label>
+       <label>Answer 3</label>
+       <label>Answer 4</label>
+     </div>
+
+     <div id="graphDisplay" class="col-xs-11">
+     <!-- test Graph -->
+     	<canvas id="myChart"></canvas>
+     	<script>
+     	var ctx = document.getElementById('myChart').getContext('2d');
+     	var myChart = new Chart(ctx, {
+     	  type: 'bar',
+     	  data: {
+     	    labels: ['Answer 1'],
+     	    datasets: [{
+     	      label: 'apples',
+     	      data: [8],
+     	      backgroundColor: "rgba(153,255,51,0.4)"
+     	    }, {
+     	      label: 'oranges',
+     	      data: [4],
+     	      backgroundColor: "rgba(255,153,0,0.4)"
+     	    },{
+     				label: 'Answer 3',
+     				data: [1],
+     				backgroundColor:"rgba(0,153,255,0.4)"
+     			},{
+     				label: 'Answer 3',
+     				data: [5],
+     				backgroundColor:"rgba(153,0,255,0.4)"
+     			}]
+     	  },
+     		options: {
+     	        scales: {
+     	            yAxes: [{
+     	                ticks: {
+     	                    max: 10,
+     	                    min: 0,
+     	                    stepSize: 1
+     	                }
+     	            }]
+     	        }
+     	    }
+     	});
+     </script>
+   </div>
+ </div>
+</div>
+ </body>
+
+ </html>
