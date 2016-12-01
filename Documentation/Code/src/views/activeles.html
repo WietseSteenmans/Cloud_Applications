@@ -8,6 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/styles.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.1.4/Chart.min.js"></script>
             <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
 
   </head>
@@ -24,32 +25,33 @@
     </ul>
   </div>
 </nav>
-<div>
-<div ng-controller="Activeles">
+<div id="Wrapper" class="container" ng-controller="Activeles">
+  <div class ="row">
+    <div class = "col-xs-8 col-xs-push-4">
+      <h1>Current Lesson: Biologie</h1>
+    </div>
+  </div>
 
-<!-- <div id="coursediv">
-  <div data-ng-repeat="x in Data"><a ng-click="send(x)"><h1>{{x}}</h1></a></div>
-</div> -->
+  <div class = "row">
+    <div class = "col-xs-7 col-xs-push-5">
+      <h2>Question?</h2>
+    </div>
+ </div>
 
-<div id="vragenDiv">
-    <table class="table">
-    <thead>
-      <tr>
-        <th>Vak</th>
-        <th>Vraag</th>
-        <th>Juist Antwoord</th>
-      </tr>
-    </thead>
-    <tbody >
-      <tr ng-repeat="x in Activelesdata">
-        <td>{{x.Coursename}}</td>
-        <td>{{x.Question}}</td>
-        <td>{{x.Answer}} {{x.RightAnswer}}</td>
-        <td><button ng-click="delete(response, $index)" type="button" value="button">X</button></td>
-      </tr>
-    </tbody>
-  </table>
-</div>
+  <div class="row">
+     <div id="answerOptions" class="col-xs-1">
+       <label>Answer 1</label>
+       <label>Answer 2</label>
+       <label>Answer 3</label>
+       <label>Answer 4</label>
+     </div>
+
+     <div id="graphDisplay" class="col-xs-11">
+     <!-- test Graph -->
+      <canvas id="myChart"></canvas>
+   </div>
+ </div>
+ <button ng-click="nextQ()">Next Question</button>
 </div>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
         <script src="js/bootstrap.min.js"></script>

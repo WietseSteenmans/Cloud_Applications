@@ -205,7 +205,6 @@ app.post("/ActivateLessen", function(req, res){
 
       filteredData = filtered;
       //res.json(filtered);
-      console.log(filtered);
     });
   });
 });
