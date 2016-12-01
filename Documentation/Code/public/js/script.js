@@ -187,4 +187,117 @@ myApp.controller("Activeles", function($scope,$http){
     $scope.Activelesdata = data;
     console.log($scope.Activelesdata);
   })
+
+    var GrafiekOptieArray = [];
+  var barGrafiek = function(){
+      var ctx = document.getElementById('myChart').getContext('2d');
+      var myChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+          labels: ['Answer 1'],
+          datasets: [{
+            label: 'apples',
+            data: [8],
+            backgroundColor: "rgba(153,255,51,0.4)"
+          }, {
+            label: 'oranges',
+            data: [4],
+            backgroundColor: "rgba(255,153,0,0.4)"
+          },{
+            label: 'Answer 3',
+            data: [1],
+            backgroundColor:"rgba(0,153,255,0.4)"
+          },{
+            label: 'Answer 4',
+            data: [5],
+            backgroundColor:"rgba(153,0,255,0.4)"
+          }]
+        },
+        options: {
+              scales: {
+                  yAxes: [{
+                      ticks: {
+                          max: 10,
+                          min: 0,
+                          stepSize: 1
+                      }
+                  }]
+              }
+          }
+      });
+    }
+    GrafiekOptieArray.push(barGrafiek);
+    console.log(GrafiekOptieArray);
+
+    var lijnGrafiek = function(){
+
+    var ctx = document.getElementById('myChart').getContext('2d');
+    var myChart = new Chart(ctx, {
+  type: 'line',
+  data: {
+    labels: ['M', 'T', 'W', 'T', 'F', 'S', 'S'],
+    datasets: [{
+      label: 'apples',
+      data: [12, 19, 3, 17, 6, 3, 7],
+      backgroundColor: "rgba(153,255,51,0.4)"
+    }, {
+      label: 'oranges',
+      data: [2, 29, 5, 5, 2, 3, 10],
+      backgroundColor: "rgba(255,153,0,0.4)"
+    }]
+  }
+})
+  }
+  GrafiekOptieArray.push(lijnGrafiek);
+
+  var pieGrafiek = function(){
+    var ctx = document.getElementById("myChart").getContext('2d');
+var myChart = new Chart(ctx, {
+  type: 'pie',
+  data: {
+    labels: ["M", "T", "W", "T", "F", "S", "S"],
+    datasets: [{
+      backgroundColor: [
+        "#2ecc71",
+        "#3498db",
+        "#95a5a6",
+        "#9b59b6",
+        "#f1c40f",
+        "#e74c3c",
+        "#34495e"
+      ],
+      data: [12, 19, 3, 17, 28, 24, 7]
+    }]
+  }
+});
+  }
+
+  GrafiekOptieArray.push(pieGrafiek);
+
+    var doughnutGrafiek = function(){
+    var ctx = document.getElementById("myChart").getContext('2d');
+var myChart = new Chart(ctx, {
+  type: 'doughnut',
+  data: {
+    labels: ["M", "T", "W", "T", "F", "S", "S"],
+    datasets: [{
+      backgroundColor: [
+        "#2ecc71",
+        "#3498db",
+        "#95a5a6",
+        "#9b59b6",
+        "#f1c40f",
+        "#e74c3c",
+        "#34495e"
+      ],
+      data: [12, 19, 3, 17, 28, 24, 7]
+    }]
+  }
+});
+  }
+  GrafiekOptieArray.push(doughnutGrafiek);
+
+  var r = Math.floor(Math.random() * 4);
+  console.log(r);
+  GrafiekOptieArray[r]();
 })
