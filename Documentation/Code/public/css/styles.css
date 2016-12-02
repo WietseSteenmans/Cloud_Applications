@@ -3,11 +3,13 @@
 }
 
 #MultipleChoice {
-	display: none;
+	display: ;
+  color: #fff;
 }
 
 #YesNo {
     display: none;
+    color: #fff;
 }
 
 #coursediv {
@@ -93,4 +95,26 @@ body {
     padding-left: 35px;
 }.main-content{
   padding-top: 2em;
+}
+.table-hover tbody tr:hover td, .table-hover tbody tr:hover th {
+  background-color: rgba(40, 115, 237, 0.9);
+}
+
+.table{
+  color: #fff;
+}
+
+.mainTile{
+  background-color: #fff;
+  width: 100%;
+  display: inline-block;
+  border-radius: 15px;
+  box-sizing: border-box;
+  padding: 1em;
+  margin-bottom: 1em;
+  opacity: 0.8;
+}
+
+.informationContent{
+  color: #fff;
 }

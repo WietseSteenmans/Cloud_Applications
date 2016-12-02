@@ -29,14 +29,14 @@
         <br>
         <div class="left-navigation">
           <ul class="list">
-            <li role="presentation" class="active"><a href="#">Home</a></li>
+            <li role="presentation" class="active"><a href="home.html">Home</a></li>
             <li role="presentation"><a href="index.html">New Questions</a></li>
             <li role="presentation"><a href="mijnlessen.html">My Lessons</a></li>
           </ul>
         </div>
       </div>
 
-      <div class="col-sm-11 main-content">
+      <div class="col-sm-11 main-content" id="coursediv">
         <div class="col-sm-4" data-ng-repeat="x in Data">
           <div class="tile" ng-style="{background: doc_classes_colors[$index % doc_classes_colors.length]}">
             <a ng-click="send(x)"><h3 class="title">{{x}}</h3></a>
@@ -44,7 +44,57 @@
         </div>
       </div>
 
-    </div>
+      <div class="col-sm-11 main-content" id="vragenDiv">
+
+        <div class="row">
+          <div class="col-sm-12">
+            <div class="mainTile">
+              <h3 class="title">{{(response | filter:{Coursename: x}:true | limitTo:1 ) [0].Coursename}}</h3>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <table class="table table-hover">
+            <thead>
+              <tr>
+                <th>Question</th>
+                <th>Right Answer</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <tr class="tableItem" ng-repeat="x in response">
+                <td>{{x.Question}}</td>
+                <td>{{x.Answer}} {{x.RightAnswer}}</td>
+                <td><button ng-click="delete(response, $index)" type="button" value="button">Remove</button></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- <div id="vragenDiv">
+          <table class="table">
+          <thead>
+            <tr>
+              <th>Vak</th>
+              <th>Vraag</th>
+              <th>Juist Antwoord</th>
+            </tr>
+          </thead>
+          <tbody >
+            <tr ng-repeat="x in response">
+              <td>{{x.Coursename}}</td>
+              <td>{{x.Question}}</td>
+              <td>{{x.Answer}} {{x.RightAnswer}}</td>
+              <td><button ng-click="delete(response, $index)" type="button" value="button">X</button></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+    </div> -->
 
     <!-- <nav class="navbar navbar-default" id="navbar">
       <div class="container-fluid">
@@ -55,12 +105,6 @@
         </ul>
       </div>
     </nav> -->
-<!-- <script>
-  var colors = ['#ff0000', '#00ff00', '#0000ff'];
-  var rnd_Nr = Math.floor(Math.random() * colors.length);
-  var random_color = colors[rnd_Nr];
-  $('.tile').css('background', random_color);
-</script> -->
 <!-- <div ng-controller="LessenController">
     <div id="coursediv">
       <div class="block-1" data-ng-repeat="x in Data"><a ng-click="send(x)"><h1>{{x}}</h1></a></div>
