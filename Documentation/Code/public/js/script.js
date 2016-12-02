@@ -93,7 +93,7 @@ myApp.controller("LessenController", function($scope,$http){
 
   var res = $http.get('http://localhost:3000/GetLessen');
 
-  var CourseArray = x
+  var CourseArray = [];
   res.success(function(data, status, headers, config){
     $scope.data = data;
     console.log($scope.data);
