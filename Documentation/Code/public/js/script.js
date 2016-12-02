@@ -93,7 +93,7 @@ myApp.controller("LessenController", function($scope,$http){
 
   var res = $http.get('http://localhost:3000/GetLessen');
 
-  var CourseArray = x 
+  var CourseArray = x
   res.success(function(data, status, headers, config){
     $scope.data = data;
     console.log($scope.data);
@@ -206,7 +206,7 @@ var Qcounter = 0;
 
   });
 
-  
+
     var GrafiekOptieArray = [];
      var barGrafiek = function(data){
      	console.log(data[0]);
@@ -244,7 +244,8 @@ var Qcounter = 0;
                       }
                   }]
               }
-          }c      });
+          }
+        });
     }
 
     GrafiekOptieArray.push(barGrafiek);
