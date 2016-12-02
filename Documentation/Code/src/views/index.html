@@ -9,91 +9,91 @@
 		<meta name="generator" content="Bootply" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-		<link href="/css/bootstrap.min.css" rel="stylesheet">
 		<link href="/css/styles.css" rel="stylesheet">
-
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
     <script type="text/javascript" src="/js/script.js"></script>
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-		<script src="/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	</head>
 
 	<body ng-app="Jarfish">
 
-		<nav class="navbar navbar-default" id="navbar">
-		  <div class="container-fluid">
-		    <div class="navbar-header">
-		    </div>
-		    <ul class="nav navbar-nav">
-		      <li class="active"><a href="#">Home</a></li>
-		      <li><a href="index.html">New Question</a></li>
-		      <li><a href="mijnlessen.html">MijnLessen</a></li>
-		      <li><a href="#">Playbooks</a></li>
-		    </ul>
-		  </div>
-		</nav>
+		<div ng-controller="QuestionCtrl">
 
-		<div class="container" ng-controller="QuestionCtrl">
-	      <h1>Create New Question!</h1>
-	      <hr>
+			<div class="col-sm-1 sidebar1">
+				<div class="logo">
+					<img src="http://www.clipartbest.com/cliparts/xTg/K9b/xTgK9bpBc.jpeg" class="img-responsive center-block" alt="Logo">
+				</div>
+				<br>
+				<div class="left-navigation">
+					<ul class="list">
+						<li role="presentation" class="active"><a href="#">Home</a></li>
+						<li role="presentation"><a href="index.html">New Questions</a></li>
+						<li role="presentation"><a href="mijnlessen.html">My Lessons</a></li>
+					</ul>
+				</div>
+			</div>
 
-	  <select>
-	    <option value="0">Type of Question ?</option>
-	    <option value="1">Multiple Choice</option>
-	    <option value="2">Yes/No</option>
-		</select>
+			<div class="col-sm-11 main-content">
+				<select>
+			    <option value="0">Type of Question ?</option>
+			    <option value="1">Multiple Choice</option>
+			    <option value="2">Yes/No</option>
+				</select>
 
-		<form name="newLesForm">
-			<div class="container" id="MultipleChoice">
-        <fieldset>
-          <label for="Coursename">Course Name:</label>
-          <input id="Coursename" type="text" required ng-model="Coursename" placeholder="Name of your Course..." />
-          <label for="eventDate">Question:</label>
-          <div style="position:relative">
-              <textarea id="Question" type="text" required ng-model="Question" placeholder="Your Question..."></textarea>
-          </div>
+				<form name="newLesForm">
+					<div id="MultipleChoice">
+		        <fieldset>
+		          <label for="Coursename">Course Name:</label>
+		          <input id="Coursename" type="text" required ng-model="Coursename" placeholder="Name of your Course..." />
+		          <label for="eventDate">Question:</label>
+		          <div style="position:relative">
+		              <textarea id="Question" type="text" required ng-model="Question" placeholder="Your Question..."></textarea>
+		          </div>
 
-          <label>Answer 1:</label>
-          <input id="answerinput1" type="text" required ng-model="Answer1" placeholder="Answer 1..." />
+		          <label>Answer 1:</label>
+		          <input id="answerinput1" type="text" required ng-model="Answer1" placeholder="Answer 1..." />
 
-          <label >Answer 2:</label>
-          <input id="answerinput2" type="text" required ng-model="Answer2" placeholder="Answer 2..." />
+		          <label >Answer 2:</label>
+		          <input id="answerinput2" type="text" required ng-model="Answer2" placeholder="Answer 2..." />
 
-					<label>Answer 3:</label>
-          <input id="answerinput3" type="text" required ng-model="Answer3" placeholder="Answer 3..." />
+							<label>Answer 3:</label>
+		          <input id="answerinput3" type="text" required ng-model="Answer3" placeholder="Answer 3..." />
 
-					<label for="eventTime">Right Answer:</label>
-          <input id="rightAnswer" type="text" required ng-model="RightAnswer" placeholder="Right Answer..." />
+							<label for="eventTime">Right Answer:</label>
+		          <input id="rightAnswer" type="text" required ng-model="RightAnswer" placeholder="Right Answer..." />
 
-				<br/>
-				</fieldset>
-        <br/>
+						<br/>
+						</fieldset>
+		        <br/>
 
-				<button type="submit" ng-click="savemultiple()" class="btn btn-primary">Save</button>
-				<button type="button" ng-click="anotherQuestion()" class="btn btn-default">Another Question</button>
-		</form>
+						<button type="submit" ng-click="savemultiple()" class="btn btn-primary">Save</button>
+						<button type="button" ng-click="anotherQuestion()" class="btn btn-default">Another Question</button>
+					</div>
+				</form>
 
-		  </div>
+				<div id="YesNo">
+	        <form name="newLesForm">
+		        <fieldset>
+		          <label for="Coursename">Course Name:</label>
+		          <input id="Coursename" type="text" required ng-model="Coursename" placeholder="Name of your Course..." />
+		          <label for="eventDate">Question:</label>
+		          <div style="position:relative">
+		              <textarea id="Questionyn" type="text" required ng-model="Vraag" placeholder="Your Question..."></textarea>
+		          </div>
+		                    <label for="eventTime">Right Answer:</label>
+		         <select class="selectpicker" ng-model="Choice" ng-options="Choice as Choice.label for Choice in Choices"></select>
+			        </fieldset>
+		        <br/>
 
-      <div class="container" id="YesNo">
-        <form name="newLesForm">
-        <fieldset>
-          <label for="Coursename">Course Name:</label>
-          <input id="Coursename" type="text" required ng-model="Coursename" placeholder="Name of your Course..." />
-          <label for="eventDate">Question:</label>
-          <div style="position:relative">
-              <textarea id="Questionyn" type="text" required ng-model="Vraag" placeholder="Your Question..."></textarea>
-          </div>
-                    <label for="eventTime">Right Answer:</label>
-         <select class="selectpicker" ng-model="Choice" ng-options="Choice as Choice.label for Choice in Choices"></select>
-          <br />
-        </fieldset>
-        <br />
-        <button type="submit" ng-click="saveyesno()" class="btn btn-primary" id="btn">Save</button>
-        <button type="button" ng-click="anotherQuestion()" class="btn btn-default" id="btn">Another Question</button>
-      </form>
-      </div>
+		        <button type="submit" ng-click="saveyesno()" class="btn btn-primary" id="btn">Save</button>
+		        <button type="button" ng-click="anotherQuestion()" class="btn btn-default" id="btn">Another Question</button>
+	      	</form>
+	      </div>
+
+			</div>
+
 		</div>
-
 	</body>
 </html>

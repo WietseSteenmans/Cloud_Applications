@@ -153,6 +153,29 @@ myApp.controller("LessenController", function($scope,$http){
       console.log($scope.data);
     })
   }
+  // Random Colored Buttons
+  $scope.doc_classes_colors = [
+             "#10ADED",
+             "#C0FF33",
+             "#C0FFEE",
+             "#1CE",
+             "#BADA55"
+        ];
+
+        function shuffle(a) {
+            var j, x, i;
+            for (i = a.length; i; i--) {
+                j = Math.floor(Math.random() * i);
+                x = a[i - 1];
+                a[i - 1] = a[j];
+                a[j] = x;
+            }
+        }
+  shuffle($scope.doc_classes_colors);
+  
+  $scope.getRandomColor = function () {
+          $scope.bgColor = $scope.doc_classes_colors[Math.floor(Math.random() * $scope.doc_classes_colors.length)];
+  };
 
 });
 
