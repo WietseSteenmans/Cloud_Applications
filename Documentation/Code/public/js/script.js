@@ -143,6 +143,20 @@ myApp.controller("LessenController", function($scope,$http){
 
   }
 
+  $scope.NewCourse = function(){
+
+    var dataObj = {
+      Coursename : $scope.NewCourseName
+    }
+
+     var res = $http.post('http://localhost:3000/addCourse', dataObj)
+
+     res.success(function(data, status, headers, config) {
+        $scope.testdata = data;
+        console.log($scope.testdata);
+     });
+  };
+
   $scope.delete = function(array, index){
     array.splice(index, 1);
 

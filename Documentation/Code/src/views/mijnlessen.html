@@ -46,7 +46,7 @@
         <div class="col-sm-4">
           <div class="tile">
             <a href ng-click="showCourse = !showCourse" ><h3 class="title" >Add a new Course</h3></a>
-            <input ng-show="showCourse" class="form-control" type="text" placeholder="Name of your Course here"/>
+            <input ng-show="showCourse" class="form-control" type="text" placeholder="Name of your Course here" ng-model="NewCourseName"/><button ng-click="NewCourse()">Add</button>
           </div>
         </div>
       </div>
