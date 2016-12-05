@@ -153,11 +153,22 @@ app.get("/GetLessen", function(req, res){
 			assert.equal(null, err);
 			results.push(doc);
 		},function(){
-			db.close();
-			res.json(results);
+			db.close(); 
       originalData = results;
 		});
 	});
+
+    mongo.connect(url, function(err, db){
+    assert.equal(null, err);
+    var cursor = db.collection('rogueCourses').find();
+    cursor.forEach(function(doc, err){
+      assert.equal(null, err);
+      results.push(doc);
+    },function(){
+      res.json(results);
+      db.close();
+    });
+  });
 
 });
 

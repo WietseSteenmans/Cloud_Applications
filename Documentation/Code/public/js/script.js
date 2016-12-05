@@ -92,6 +92,7 @@ myApp.controller("QuestionCtrl", function($scope,$http){
 myApp.controller("LessenController", function($scope,$http){
 
   var res = $http.get('http://localhost:3000/GetLessen');
+  //var resource = $http.get('http://localhost:3000/addCourse')
 
   var CourseArray = [];
   res.success(function(data, status, headers, config){
@@ -108,6 +109,16 @@ myApp.controller("LessenController", function($scope,$http){
     $scope.Data = unique;
     console.log(typeof $scope.Data);
   });
+
+  // resource.success(function(data, status, headers, config){
+  //   $scope.data = data;
+  //   console.log($scope.data);
+  //   var courses = $scope.data;
+  //   for (var i = 0; i <= courses.length -1; i++) {
+  //     CourseArray.push(courses[i].Coursename);
+  //     console.log(courses[i].Coursename);
+  //   }
+  // })
 
 
   $scope.send = function (course){
