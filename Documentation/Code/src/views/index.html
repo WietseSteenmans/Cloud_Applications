@@ -46,11 +46,14 @@
 
 <!-- This is the layout for the Multiplechoice Question -->
 
-				<form class="form-horizontal" name="newLesForm" id="MultipleChoice">
+				<form class="form-horizontal" name="newLesForm" id="MultipleChoice" ng-controller="LessenController">
 					<div class="form-group">
 						<label for="Coursename" class="col-sm-2 control-label">Coursename </label>
 						<div class="col-sm-10">
 							<input class="form-control"id="Coursename" type="text" required ng-model="Coursename" placeholder="Name of your Course here"/>
+							<select>
+								<option ng-repeat="x in Data">{{x}}</option>
+							</select>
 						</div>
 					</div>
 

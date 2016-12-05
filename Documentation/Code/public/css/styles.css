@@ -4,9 +4,11 @@
 
 #MultipleChoice {
 	display: ;
+  color: ;
+}
+label {
   color: #fff;
 }
-
 #YesNo {
     display: none;
     color: #fff;
@@ -33,6 +35,7 @@ body {
 }
 
 .tile {
+  background: #fff;
   width: 100%;
   display: inline-block;
   border-radius: 15px;
