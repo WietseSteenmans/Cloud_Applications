@@ -25,6 +25,24 @@ myApp.controller("QuestionCtrl", function($scope,$http){
 
 });
 
+    var res = $http.get('http://localhost:3000/GetLessen');
+
+  var CourseArray = [];
+  res.success(function(data, status, headers, config){
+    $scope.data = data;
+    console.log($scope.data);
+    var lessData = $scope.data;
+    for (var i = 0; i <= lessData.length -1; i++) {
+      CourseArray.push(lessData[i].Coursename);
+      CourseArray.sort();
+    }
+   var unique = CourseArray.filter(function(elem, index, self) {
+    return index == self.indexOf(elem);
+      })
+    $scope.Data = unique;
+    console.log(typeof $scope.Data);
+  });
+
   //Clearing Textboxes
   $scope.anotherQuestion = function(){
 
@@ -37,6 +55,10 @@ myApp.controller("QuestionCtrl", function($scope,$http){
 
   }
 
+  $scope.SendOption = function(option){
+    console.log(option);
+  }
+
   $scope.savemultiple = function() {
 
      var dataObj = {
@@ -47,6 +69,8 @@ myApp.controller("QuestionCtrl", function($scope,$http){
       Antwoord3 : $scope.Answer3,
       RightAnswer : $scope.RightAnswer
      };
+
+
 
      console.log(dataObj);
 
@@ -92,7 +116,6 @@ myApp.controller("QuestionCtrl", function($scope,$http){
 myApp.controller("LessenController", function($scope,$http){
 
   var res = $http.get('http://localhost:3000/GetLessen');
-  //var resource = $http.get('http://localhost:3000/addCourse')
 
   var CourseArray = [];
   res.success(function(data, status, headers, config){
@@ -109,16 +132,6 @@ myApp.controller("LessenController", function($scope,$http){
     $scope.Data = unique;
     console.log(typeof $scope.Data);
   });
-
-  // resource.success(function(data, status, headers, config){
-  //   $scope.data = data;
-  //   console.log($scope.data);
-  //   var courses = $scope.data;
-  //   for (var i = 0; i <= courses.length -1; i++) {
-  //     CourseArray.push(courses[i].Coursename);
-  //     console.log(courses[i].Coursename);
-  //   }
-  // })
 
 
   $scope.send = function (course){
@@ -170,14 +183,20 @@ myApp.controller("LessenController", function($scope,$http){
 
   $scope.delete = function(array, index){
     array.splice(index, 1);
+    console.log(array[index]._id);
 
-    var res = $http.post('http://localhost:3000/deleteLes');
+
+    var dataObj = {
+      id : array[index]._id
+    }
+
+    var res = $http.post('http://localhost:3000/deleteLes', dataObj);
 
     res.success(function(data,status,headers,config){
       $scope.data = data;
       console.log($scope.data);
-    })
-  }
+    });
+  };
   // Random Colored Buttons
   $scope.doc_classes_colors = [
              "#10ADED",

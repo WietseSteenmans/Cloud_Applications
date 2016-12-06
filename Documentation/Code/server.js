@@ -7,6 +7,7 @@ var cookieParser = require('cookie-parser');
 // var dbMultipleChoiceLessen = mongojs('jarfish', ['MultipleChoiceLessen']);
 // var dbYesNoLessen = mongojs('jarfish', ['YesNoLessen']);
 var mongo = require('mongodb').MongoClient;
+var objectId = require('mongodb').ObjectID;
 var assert =require('assert');
 var session = require('express-session');
 var nodemailer = require("nodemailer");
@@ -181,9 +182,27 @@ app.post("/Vragen", function (req,res) {
 
 });
 
-app.delete("/deleteLes", function(req, res){
+app.post('/deleteLes', function (req, res) {
+  var id = req.body.id;
+  console.log(id);
+  mongo.connect(url, function(err, db) {
+    assert.equal(null, err);
+    db.collection('MultipleChoiceLessen').deleteOne({"_id": objectId(id)}, function(err, result) {
+      assert.equal(null, err);
+      console.log('Item deleted');
+      db.close();
+    });
+  });
 
-})
+    mongo.connect(url, function(err, db) {
+    assert.equal(null, err);
+    db.collection('YesNoLessen').deleteOne({"_id": objectId(id)}, function(err, result) {
+      assert.equal(null, err);
+      console.log('Item deleted');
+      db.close();
+    });
+  });
+});
 
 var filteredData = [];
 
