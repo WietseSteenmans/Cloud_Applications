@@ -257,7 +257,7 @@ var Qcounter = 0;
     console.log($scope.Activelesdata);
     var r = Math.floor(Math.random() * 4);
     console.log(r);
-    GrafiekOptieArray[0]($scope.Activelesdata);
+    GrafiekOptieArray[r]($scope.Activelesdata);
 
       $scope.nextQ = function(){
   	Qcounter++;
