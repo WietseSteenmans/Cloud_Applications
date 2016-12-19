@@ -1,27 +1,5 @@
-.modal-footer {
-  border-top: 0px;
-}
-
-#MultipleChoice {
-	display: ;
-  color: ;
-}
-label {
-  color: #fff;
-}
-#YesNo {
-    display: none;
-    color: #fff;
-}
-
-#coursediv {
-	display: block;
-}
-
-#vragenDiv {
-	display: none;
-}
-
+/*This is the same everywhere.*/
+/*Main Container, contains everything*/
 body {
   background: url("https://s-media-cache-ak0.pinimg.com/originals/69/05/88/690588dec604b0b70f79c3342b2f6474.jpg") no-repeat center center fixed;
   -webkit-background-size: cover;
@@ -29,11 +7,20 @@ body {
   -o-background-size: cover;
   background-size: cover;
 }
-
-#navMenu{
-  position:;
+label {
+  color: #fff;
 }
-
+.container-fluid{
+  padding-left: 0em;
+  padding-top: 2em;
+}
+/*INDEX*/
+/*Index.html, hides the yes/no Part*/
+#YesNo {
+    display: none;
+}
+/*MIJN LESSEN*/
+/*mijnLessen.html Course Tiles*/
 .tile {
   background: #fff;
   width: 100%;
@@ -44,69 +31,23 @@ body {
   margin-bottom: 1em;
   opacity: 0.8;
 }
+/*MijnLessen Course Names*/
 .title {
     text-align: center;
     color: #333333;
     font-size: 3em;
     font: Verdana;
 }
-
-.container-fluid{
-  padding-left: 0em;
-  padding-top: 2em;
+/*MijnLessen, Hidden/Visible, table*/
+.table{
+  color: #fff;
+  table-layout: auto;
 }
-/*test*/
-.sidebar1 {
-    background: #fff;
-    background: -webkit-linear-gradient(#FFFFFF, #738485, #385051);
-    /* For Safari 5.1 to 6.0 */
-    background: -o-linear-gradient(#FFFFFF, #738485, #385051);
-    /* For Opera 11.1 to 12.0 */
-    background: -moz-linear-gradient(#FFFFFF, #738485, #385051);
-    /* For Firefox 3.6 to 15 */
-    background: linear-gradient(#FFFFFF, #738485, #385051);
-    /* Standard syntax */
-    padding: 0px;
-    min-height: 100%;
-    height: 100vh;
-}
-.logo {
-    max-height: 130px;
-}
-.logo>img {
-    margin-top: 30px;
-    padding: 3px;
-    border: 3px solid white;
-    border-radius: 100%;
-}
-.list {
-    color: #fff;
-    list-style: none;
-    padding-left: 0px;
-}
-.list::first-line {
-    color: rgba(255, 255, 255, 0.5);
-}
-.list> li, h5 {
-    padding: 5px 0px 5px 40px;
-}
-.list>li:hover {
-    background-color: rgba(255, 255, 255, 0.2);
-    border-left: 5px solid white;
-    color: white;
-    font-weight: bolder;
-    padding-left: 35px;
-}.main-content{
-  padding-top: 2em;
-}
+/*MijnLessen, Hidden/Visible, hovers the table*/
 .table-hover tbody tr:hover td, .table-hover tbody tr:hover th {
   background-color: rgba(40, 115, 237, 0.9);
 }
-
-.table{
-  color: #fff;
-}
-
+/*MijnLessen, Hidden/Visible, Big Coursename On TOp*/
 .mainTile{
   background-color: #fff;
   width: 100%;
@@ -117,7 +58,11 @@ body {
   margin-bottom: 1em;
   opacity: 0.8;
 }
-
+/*MijnLessen, HIDE THE QUESTIONS*/
+#vragenDiv {
+	display: none;
+}
+/*HOME*/
 .informationContent{
   color: #fff;
 }

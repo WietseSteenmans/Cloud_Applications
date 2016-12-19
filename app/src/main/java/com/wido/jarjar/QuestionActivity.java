@@ -65,7 +65,16 @@ public class QuestionActivity extends ActionBarActivity {
             }
         });
 
-
+        // Button Scan Answers
+        final Button scanAnswersBtn = (Button) findViewById(R.id.countAnswersBtn);
+        scanAnswersBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //Intent
+                Intent intentScanAnswers = new Intent(QuestionActivity.this, ScanAnswersActivity.class);
+                startActivity(intentScanAnswers);
+            }
+        });
     }
 
     public String readFromFile() {
