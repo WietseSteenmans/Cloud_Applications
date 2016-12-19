@@ -18,124 +18,93 @@
 
   </head>
 
-  <body ng-app="Jarfish">
+<body ng-app="Jarfish">
+  <div ng-controller="LessenController">
 
-    <div ng-controller="LessenController">
+<!-- Navigation -->
+    <div class="row affix-row">
+      <div class="col-sm-2 affix-sidebar">
+        <div class="sidebar-nav">
+          <div class="navbar navbar-default" role="navigation">
 
-      <div class="col-sm-1 sidebar1">
-        <div class="logo">
-          <img src="http://www.clipartbest.com/cliparts/xTg/K9b/xTgK9bpBc.jpeg" class="img-responsive center-block" alt="Logo">
-        </div>
-        <br>
-        <div class="left-navigation">
-          <ul class="list">
-            <li role="presentation" class="active"><a href="home.html">Home</a></li>
-            <li role="presentation"><a href="index.html">New Questions</a></li>
-            <li role="presentation"><a href="mijnlessen.html">My Lessons</a></li>
-          </ul>
+            <!-- When the screen is too small this will toggle  -->
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-navbar-collapse">
+                <span class="sr-only"> Toggle The Navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              <span class="visible-xs navbar-brand">Sidebar Menu</span>
+            </div>
+
+            <div class="navbar-collapse collapse sidebar-navbar-collapse">
+              <ul class="nav navbar-nav" id="sidenav01">
+                <li class="active"><a href="#">
+                  <h1>Control Panel</h1>
+                </li>
+                <li><a href="home.html"><span class="glyphicon glyphicon-home"></span>  Information</a></li>
+                <li><a href="mijnlessen.html"><span class="glyphicon glyphicon-th"></span>  My Lessons</a></li>
+                <li><a href="index.html"><span class="glyphicon glyphicon-th-list"></span>  New Questions</a></li>
+              </ul>
+            </div>
+
+          </div>
         </div>
       </div>
 
-      <div class="col-sm-11 main-content" id="coursediv">
-        <div class="col-sm-4" data-ng-repeat="x in Data">
-          <div class="tile" ng-style="{background: doc_classes_colors[$index % doc_classes_colors.length]}">
-            <a ng-click="send(x)"><h3 class="title">{{x}}</h3></a>
-          </div>
-        </div>
 
-        <div class="col-sm-4">
-          <div class="tile">
-            <a href ng-click="showCourse = !showCourse" ><h3 class="title" >Add a new Course</h3></a>
-            <input ng-show="showCourse" class="form-control" type="text" placeholder="Name of your Course here"/>
-          </div>
-        </div>
-      </div>
+<!-- Page Content -->
+        <div class="col-sm-10 main-content affix-content" id="coursediv">
+          <div class="container">
+            <div class="col-sm-4" data-ng-repeat="x in Data">
+              <div class="tile" ng-style="{background: doc_classes_colors[$index % doc_classes_colors.length]}">
+                <a ng-click="send(x)"><h3 class="title">{{x}}</h3></a>
+              </div>
+            </div>
 
-      <div class="col-sm-11 main-content" id="vragenDiv">
-
-        <div class="row">
-          <div class="col-sm-12">
-            <div class="mainTile">
-              <h3 class="title">{{(response | filter:{Coursename: x}:true | limitTo:1 ) [0].Coursename}}</h3>
+            <div class="col-sm-4">
+              <div class="tile">
+                <a href ng-click="showCourse = !showCourse" ><h3 class="title" >Add a new Course</h3></a>
+                <input ng-show="showCourse" class="form-control" type="text" placeholder="Name of your Course here"/>
+              </div>
             </div>
           </div>
         </div>
 
-        <div class="row">
-          <table class="table table-hover">
-            <thead>
-              <tr>
-                <th>Question</th>
-                <th>Right Answer</th>
-              </tr>
-            </thead>
+<!-- Display Questions -->
+        <div class="col-sm-11 main-content affix-content" id="vragenDiv">
+          <div class="row">
+            <div class="col-sm-12">
+              <div class="mainTile">
+                <h3 class="title">{{(response | filter:{Coursename: x}:true | limitTo:1 ) [0].Coursename}}</h3>
+              </div>
+            </div>
+          </div>
 
-            <tbody>
-              <tr class="tableItem" ng-repeat="x in response">
-                <td>{{x.Question}}</td>
-                <td>{{x.Answer}} {{x.RightAnswer}}</td>
-                <td><button ng-click="delete(response, $index)" type="button" value="button">Remove</button></td>
-              </tr>
-            </tbody>
-          </table>
+          <div class="row">
+            <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th>Question</th>
+                  <th>Right Answer</th>
+                  <th colspan="2">Configurations</th>
+                </tr>
+              </thead>
+
+              <tbody>
+                <tr class="tableItem" ng-repeat="x in response">
+                  <td class="col-xs-8">{{x.Question}}</td>
+                  <td class="col-xs-2">{{x.Answer}} {{x.RightAnswer}}</td>
+                  <td class="col-xs-1"><button ng-click="delete(response, $index)" type="button" value="button">Remove</button></td>
+                  <td class="col-xs-1"><button ng-click="" type="button" value="button">Edit</button></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
+
       </div>
-
-      <!-- <div id="vragenDiv">
-          <table class="table">
-          <thead>
-            <tr>
-              <th>Vak</th>
-              <th>Vraag</th>
-              <th>Juist Antwoord</th>
-            </tr>
-          </thead>
-          <tbody >
-            <tr ng-repeat="x in response">
-              <td>{{x.Coursename}}</td>
-              <td>{{x.Question}}</td>
-              <td>{{x.Answer}} {{x.RightAnswer}}</td>
-              <td><button ng-click="delete(response, $index)" type="button" value="button">X</button></td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-
-    </div> -->
-
-    <!-- <nav class="navbar navbar-default" id="navbar">
-      <div class="container-fluid">
-        <ul class="nav navbar-nav">
-          <li class="active"><a href="#">Home</a></li>
-          <li><a href="index.html">New Question</a></li>
-          <li><a href="mijnlessen.html">MijnLessen</a></li>
-        </ul>
-      </div>
-    </nav> -->
-<!-- <div ng-controller="LessenController">
-    <div id="coursediv">
-      <div class="block-1" data-ng-repeat="x in Data"><a ng-click="send(x)"><h1>{{x}}</h1></a></div>
-    </div> -->
-
-    <!-- <div id="vragenDiv">
-        <table class="table">
-        <thead>
-          <tr>
-            <th>Vak</th>
-            <th>Vraag</th>
-            <th>Juist Antwoord</th>
-          </tr>
-        </thead>
-        <tbody >
-          <tr ng-repeat="x in response">
-            <td>{{x.Coursename}}</td>
-            <td>{{x.Question}}</td>
-            <td>{{x.Answer}} {{x.RightAnswer}}</td>
-            <td><button ng-click="delete(response, $index)" type="button" value="button">X</button></td>
-          </tr>
-        </tbody>
-      </table>
-    </div> -->
     </div>
   </body>
 </html>
