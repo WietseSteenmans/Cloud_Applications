@@ -49,6 +49,10 @@
               </ul>
             </div>
 
+        <div class="col-sm-4">
+          <div class="tile">
+            <a href ng-click="showCourse = !showCourse" ><h3 class="title" >Add a new Course</h3></a>
+            <input ng-show="showCourse" class="form-control" type="text" placeholder="Name of your Course here" ng-model="NewCourseName"/><button ng-click="NewCourse()">Add</button>
           </div>
         </div>
       </div>
@@ -91,6 +95,17 @@
                   <th colspan="2">Configurations</th>
                 </tr>
               </thead>
+            <tbody>
+              <tr class="tableItem" ng-repeat="x in response">
+                <td contenteditable>{{x.Question}}</td>
+                <td>{{x.Answer}} {{x.RightAnswer}}</td>
+                <td><button ng-click="delete(response, $index)" type="button" value="button">Remove</button>
+                <button ng-click="edit(response, $index)">Edit</button></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
 
               <tbody>
                 <tr class="tableItem" ng-repeat="x in response">

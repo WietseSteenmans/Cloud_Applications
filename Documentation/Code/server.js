@@ -7,6 +7,7 @@ var cookieParser = require('cookie-parser');
 // var dbMultipleChoiceLessen = mongojs('jarfish', ['MultipleChoiceLessen']);
 // var dbYesNoLessen = mongojs('jarfish', ['YesNoLessen']);
 var mongo = require('mongodb').MongoClient;
+var objectId = require('mongodb').ObjectID;
 var assert =require('assert');
 var session = require('express-session');
 var nodemailer = require("nodemailer");
@@ -153,11 +154,22 @@ app.get("/GetLessen", function(req, res){
 			assert.equal(null, err);
 			results.push(doc);
 		},function(){
-			db.close();
-			res.json(results);
+			db.close(); 
       originalData = results;
 		});
 	});
+
+    mongo.connect(url, function(err, db){
+    assert.equal(null, err);
+    var cursor = db.collection('rogueCourses').find();
+    cursor.forEach(function(doc, err){
+      assert.equal(null, err);
+      results.push(doc);
+    },function(){
+      res.json(results);
+      db.close();
+    });
+  });
 
 });
 
@@ -170,9 +182,27 @@ app.post("/Vragen", function (req,res) {
 
 });
 
-app.delete("/deleteLes", function(req, res){
+app.post('/deleteLes', function (req, res) {
+  var id = req.body.id;
+  console.log(id);
+  mongo.connect(url, function(err, db) {
+    assert.equal(null, err);
+    db.collection('MultipleChoiceLessen').deleteOne({"_id": objectId(id)}, function(err, result) {
+      assert.equal(null, err);
+      console.log('Item deleted');
+      db.close();
+    });
+  });
 
-})
+    mongo.connect(url, function(err, db) {
+    assert.equal(null, err);
+    db.collection('YesNoLessen').deleteOne({"_id": objectId(id)}, function(err, result) {
+      assert.equal(null, err);
+      console.log('Item deleted');
+      db.close();
+    });
+  });
+});
 
 var filteredData = [];
 
@@ -217,6 +247,18 @@ app.post("/Results", function(req,res){
 
 app.get('/dataFilter', function(req, res){
   res.json(filteredData);
+})
+
+app.post('/addCourse', function(req, res){
+  console.log(req.body);
+    mongo.connect(url, function(err, db) {
+    assert.equal(null,err);
+    db.collection('rogueCourses').insertOne(req.body, function(err, result) {
+      assert.equal(null,err);
+      console.log('Item inserted');
+      db.close();
+    });
+  });
 })
 //  app.post('/Register', function(req, res){
 //  	console.log(req.body);

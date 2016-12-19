@@ -28,7 +28,7 @@ public class MainMenu extends ActionBarActivity {
         //Instantiate the RequestQueue using the singleton object
         RequestQueue queue = MySingleton.getInstance(this.getApplicationContext()).getRequestQueue();
         //Place To get the data
-        String url ="http://10.0.2.2:3000/GetLessen";
+        String url ="http://172.16.215.122:3000/GetLessen";
 
         final JsonArrayRequest jsonObjReq1 = new JsonArrayRequest(Request.Method.GET, url, null, new com.android.volley.Response.Listener<JSONArray>() {
             @Override
