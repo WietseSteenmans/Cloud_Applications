@@ -10,10 +10,6 @@ body {
 label {
   color: #fff;
 }
-.container-fluid{
-  padding-left: 0em;
-  padding-top: 2em;
-}
 /*INDEX*/
 /*Index.html, hides the yes/no Part*/
 #YesNo {
@@ -65,4 +61,19 @@ label {
 /*HOME*/
 .informationContent{
   color: #fff;
+}
+.main-content{
+  padding-top: 1em;
+}
+.logo{
+  padding-top: 1em;
+  padding-bottom: 1em;
+}
+.optionsTile{
+  position:relative;
+  float: right;
+}
+.form-horizontal{
+  padding-right: 2em;
+  padding-left: 1em;
 }
