@@ -11,9 +11,14 @@ var objectId = require('mongodb').ObjectID;
 var assert =require('assert');
 var session = require('express-session');
 var nodemailer = require("nodemailer");
-var _ = require("underscore");
+
 
 var app = express();
+// Socket.io
+var http = require('http').Server(app);
+var io = require('socket.io')(http);
+
+var _ = require("underscore");
 
 var url = 'mongodb://localhost:27017/jarfish';
 var originalData;
@@ -204,11 +209,28 @@ app.post('/deleteLes', function (req, res) {
   });
 });
 
+
+app.post('/editLes', function(req, res){
+  
+    mongo.connect(url, function(err, db) {
+    assert.equal(null, err);
+    db.collection('user-data').updateOne({"_id": objectId(id)}, {$set: item}, function(err, result) {
+      assert.equal(null, err);
+      console.log('Item updated');
+      db.close();
+    });
+  });
+});
+
+
 var filteredData = [];
 
 //Krijg Course aan, laat eerstre vraag zien en dan volgende enz...
 app.post("/ActivateLessen", function(req, res){
     var results = [];
+
+    console.log("Testing, i'm here" + req.body.Coursename);
+
   mongo.connect(url, function(err, db){
     assert.equal(null, err);
     var cursor = db.collection('MultipleChoiceLessen').find();
@@ -234,16 +256,68 @@ app.post("/ActivateLessen", function(req, res){
       var filtered = _.where(originalData, { Coursename: Vragen });
 
       filteredData = filtered;
-      //res.json(filtered);
-      console.log(filtered);
+
+      //res.json(filteredData);
+      io.sockets.emit('message', filteredData);
+      console.log(filteredData);
     });
   });
-});
+    //res.json(filtered);
+      console.log(filtered);
+    });
 
 app.post("/Results", function(req,res){
   console.log(req.body);
   res.json(req.body);
 })
+
+
+app.post("/nextQuestion", function(req, res){
+  console.log(req.body);
+  io.sockets.emit('nextQ', 1);
+})
+
+// app.get('/dataFilter', function(req, res){
+//   res.json(filteredData);
+// })
+ 
+
+
+//  //When a client connects, we note it in the console
+// io.sockets.on('connection', function (socket) {
+//     socket.emit('message', 'You are connected!');
+
+//     // When the server receives a “message” type signal from the client   
+//     socket.on('message', function (message) {
+//         console.log('A client is speaking to me! They’re saying: ' + message);
+//     });
+
+//     socket.on('message', function(data){
+//       socket.emit('ticker', 'Test');
+//     });
+// });
+
+
+io.on('connection', function(socket){
+  console.log('A user connected');
+  //Send a message when 
+  setTimeout(function(){
+    //Sending an object when emmiting an event
+  socket.emit('testerEvent', { description: 'A custom event named testerEvent!'});
+  }, 4000);
+  socket.on('disconnect', function () {
+    console.log('A user disconnected');
+  });
+});
+
+
+
+
+
+
+
+
+
 
 app.get('/dataFilter', function(req, res){
   res.json(filteredData);
@@ -316,6 +390,7 @@ app.use(function (req, res, next) {
     next();
 });
 
-app.listen(3000, function (err) {
+http.listen(3000, function (err) {
     console.log('running server on port 3000');
 });
+
