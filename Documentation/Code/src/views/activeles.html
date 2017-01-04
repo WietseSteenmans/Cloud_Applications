@@ -19,18 +19,25 @@
 
   </head>
   <body ng-app="Jarfish">
+
 <nav class="navbar navbar-default" id="navbar">
   <div class="container-fluid">
     <div class="navbar-header">
     </div>
     <ul class="nav navbar-nav">
-      <li class="active"><a href="#">Home</a></li>
-      <li><a href="index.html">New Question</a></li>
-      <li><a href="mijnlessen.html">MijnLessen</a></li>
-      <li><a href="#">Playbooks</a></li>
+      <li><a href="mijnlessen.html"><span class="glyphicon glyphicon-arrow-left"></span>Return to your courses</a></li>
     </ul>
   </div>
 </nav>
+
+<div>
+  <p>We are almost there! You have configured some questions if you have not do that first. Now we are ready to scan some answers! You don't have to do anything on this page.
+    Get your smartphone or tablet next to you. Install the companion application which can be found in the app-store. The device will be your navigator, like a tv-remote.
+    On your device you should select one of your courses. You can see a list of all the questions in the course. On the top is a big button. Press it! Now we have a connection with the website.
+    Time to scan your crowd. Press the button "Scan Answers". When you are done all the answers will be poured in the graph on your website, all this in real-time!
+    The application has some other buttons too, check them out. Doing is learning as they say. Have fun!</p>
+</div>
+
 <div id="Wrapper" class="container" ng-controller="Activeles">
   <div class ="row" ng-repeat="x in Activelesdata | limitTo : 1">
     <div class = "col-xs-8 col-xs-push-4">
@@ -40,7 +47,7 @@
 
   <div class = "row">
     <div class = "col-xs-7 col-xs-push-5" ng-repeat="x in (filteredItems = (Activelesdata | filter:query))">
-      <h2>Question? {{x.Question}}</h2>
+      <h2>QuestionKappa? {{x.Question}}</h2>
     </div>
  </div>
 
@@ -69,4 +76,3 @@
       {{ item.name }}
     </a>
   </li> -->
-
