@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+		<meta charset="utf-8">
+
+		<title>JarFish</title>
+
+		<meta name="generator" content="Bootply" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+		<link href="/css/styles.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+    <script type="text/javascript" src="/js/script.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	</head>
+
+	<body ng-app="Jarfish">
+
+		<div ng-controller="QuestionCtrl">
+
+<!-- This is the navigation bar -->
+
+			<div class="col-sm-2 affix-sidebar">
+				<div class="sidebar-nav">
+					<div class="navbar navbar-default" role="navigation" >
+
+						<!-- When the screen is too small this will toggle  -->
+						<div class="navbar-header">
+							<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-navbar-collapse">
+								<span class="sr-only"> Toggle The Navigation</span>
+								<span class="icon-bar"></span>
+								<span class="icon-bar"></span>
+								<span class="icon-bar"></span>
+							</button>
+							<span class="visible-xs navbar-brand">Sidebar Menu</span>
+						</div>
+
+						<div class="navbar-collapse collapse sidebar-navbar-collapse">
+							<ul class="nav navbar-nav" id="sidenav01">
+								<div class="logo">
+									<img src="https://thetomatos.com/wp-content/uploads/2016/05/school-book-clipart.jpeg" class="img-responsive img-circle hidden-xs" alt="logo">
+								</div>
+								<li class="active"><a href="home.html"><span class="glyphicon glyphicon-home"></span>  Information</a></li>
+								<li><a href="mijnlessen.html"><span class="glyphicon glyphicon-th"></span>  My Lessons</a></li>
+								<li><a href="index.html"><span class="glyphicon glyphicon-th-list"></span>  New Questions</a></li>
+							</ul>
+						</div>
+
+					</div>
+				</div>
+			</div>
+
+			<div class="col-sm-10 main-content affix-content">
+				<div class="row">
+					<div class="form-group">
+						<label for="questionSelect" >Select your type of question:</label>
+						<select class="form-control" id="questionSelect">
+					    <option value="0">Type of Question ?</option>
+					    <option value="1">Multiple Choice</option>
+					    <option value="2">Yes/No</option>
+						</select>
+					</div>
+				</div>
+<!-- This is the layout for the Multiplechoice Question -->
+				<div class="row">
+					<form class="form-horizontal" name="newLesForm" id="MultipleChoice" >
+
+						<div class="form-group">
+							<label for="Coursename" class="col-sm-2 control-label">Coursename </label>
+							<div class="col-sm-5">
+								<input class="form-control" id="Coursename" type="text" required ng-model="Coursename" placeholder="Name of your Course here"/>
+							</div>
+							<div class="col-sm-5">
+								<select class="form-control">
+									<option ng-repeat="x in Data" >{{x}}</option>
+								</select>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label for="eventDate" class="col-sm-2 control-label">Question </label>
+							<div class="col-sm-10">
+								<textarea class="form-control" rows="3" id="Question" type="text" required ng-model="Question" placeholder="Your Question over here"></textarea>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label class="col-sm-2 control-label">Answer 1 </label>
+							<div class="col-sm-10">
+								<input class="form-control" id="answerinput1" type="text" required ng-model="Answer1" placeholder="Wrong Answer here" />
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label class="col-sm-2 control-label">Answer 2 </label>
+							<div class="col-sm-10">
+								<input class="form-control" id="answerinput2" type="text" required ng-model="Answer2" placeholder="Wrong Answer here" />
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label class="col-sm-2 control-label">Answer 3 </label>
+							<div class="col-sm-10">
+								<input class="form-control" id="answerinput3" type="text" required ng-model="Answer3" placeholder="Wrong Answer here" />
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label class="col-sm-2 control-label">Right Answer </label>
+							<div class="col-sm-10">
+								<input class="form-control" id="rightAnswer" type="text" required ng-model="RightAnswer" placeholder="Right Answer here" />
+							</div>
+						</div>
+
+						<div class="form-group">
+					    <div class="col-sm-offset-2 col-sm-10">
+					      <button type="submit" ng-click="savemultiple()" class="btn btn-primary">Save</button>
+								<button type="button" ng-click="anotherQuestion()" class="btn btn-default">Another Question</button>
+					    </div>
+					  </div>
+
+					</form>
+				</div>
+
+<!-- This is the layout for the Yes or No Question -->
+
+				<div class="row">
+
+					<form class="form-horizontal" name="newLesForm" id="YesNo">
+
+						<div class="form-group">
+							<label for="Coursename" class="col-sm-2 control-label">Coursename </label>
+							<div class="col-sm-5">
+								<input class="form-control" id="Coursename" type="text" required ng-model="Coursename" placeholder="Name of your Course here"/>
+							</div>
+							<div class="col-sm-5">
+								<select class="form-control">
+									<option ng-repeat="x in Data" >{{x}}</option>
+								</select>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label for="eventDate" class="col-sm-2 control-label">Question </label>
+							<div class="col-sm-10">
+								<textarea class="form-control" rows="3" id="Question" type="text" required ng-model="Vraag" placeholder="Your Question over here"></textarea>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label for="eventDate" class="col-sm-2 control-label">Answer </label>
+							<div class="col-sm-10">
+								<select class="form-control selectpicker" ng-model="Choice" ng-options="Choice as Choice.label for Choice in Choices"></select>
+							</div>
+						</div>
+
+						<div class="form-group">
+					    <div class="col-sm-offset-2 col-sm-10">
+					      <button type="submit" ng-click="saveyesno()" class="btn btn-primary" id="btn">Save</button>
+				        <button type="button" ng-click="anotherQuestion()" class="btn btn-default" id="btn">Another Question</button>
+					    </div>
+					  </div>
+
+					</form>
+				</div>
+		</div>
+	</body>
+</html>

@@ -1,0 +1,79 @@
+/*This is the same everywhere.*/
+/*Main Container, contains everything*/
+body {
+  background: url("https://s-media-cache-ak0.pinimg.com/originals/69/05/88/690588dec604b0b70f79c3342b2f6474.jpg") no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+label {
+  color: #fff;
+}
+/*INDEX*/
+/*Index.html, hides the yes/no Part*/
+#YesNo {
+    display: none;
+}
+/*MIJN LESSEN*/
+/*mijnLessen.html Course Tiles*/
+.tile {
+  background: #fff;
+  width: 100%;
+  display: inline-block;
+  border-radius: 15px;
+  box-sizing: border-box;
+  padding: 1em;
+  margin-bottom: 1em;
+  opacity: 0.8;
+}
+/*MijnLessen Course Names*/
+.title {
+    text-align: center;
+    color: #333333;
+    font-size: 3em;
+    font: Verdana;
+}
+/*MijnLessen, Hidden/Visible, table*/
+.table{
+  color: #fff;
+  table-layout: auto;
+}
+/*MijnLessen, Hidden/Visible, hovers the table*/
+.table-hover tbody tr:hover td, .table-hover tbody tr:hover th {
+  background-color: rgba(40, 115, 237, 0.9);
+}
+/*MijnLessen, Hidden/Visible, Big Coursename On TOp*/
+.mainTile{
+  background-color: #fff;
+  width: 100%;
+  display: inline-block;
+  border-radius: 15px;
+  box-sizing: border-box;
+  padding: 1em;
+  margin-bottom: 1em;
+  opacity: 0.8;
+}
+/*MijnLessen, HIDE THE QUESTIONS*/
+#vragenDiv {
+	display: none;
+}
+/*HOME*/
+.informationContent{
+  color: #fff;
+}
+.main-content{
+  padding-top: 1em;
+}
+.logo{
+  padding-top: 1em;
+  padding-bottom: 1em;
+}
+.optionsTile{
+  position:relative;
+  float: right;
+}
+.form-horizontal{
+  padding-right: 2em;
+  padding-left: 1em;
+}
