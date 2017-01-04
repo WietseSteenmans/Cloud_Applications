@@ -182,17 +182,28 @@ myApp.controller("LessenController", function($scope,$http){
   };
 
   $scope.delete = function(array, index){
+<<<<<<< HEAD
     console.log(array[index]._id);
     console.log(index);
+=======
+    array.splice(index, 1);
+    console.log(array[index]._id);
+>>>>>>> b8957dd502ddb879cf82652331ef2abe90586225
 
 
     var dataObj = {
       id : array[index]._id
     }
+<<<<<<< HEAD
     console.log(dataObj);
 
     var res = $http.post('http://localhost:3000/deleteLes', dataObj);
     array.splice(index, 1);
+=======
+
+    var res = $http.post('http://localhost:3000/deleteLes', dataObj);
+
+>>>>>>> b8957dd502ddb879cf82652331ef2abe90586225
     res.success(function(data,status,headers,config){
       $scope.data = data;
       console.log($scope.data);
@@ -248,6 +259,7 @@ myApp.controller("LessenController", function($scope,$http){
 
 myApp.controller("Activeles", function($scope,$http){
 
+<<<<<<< HEAD
 
     var socket = io('http://localhost');
   socket.on('message', function(data) {
@@ -291,6 +303,34 @@ myApp.controller("Activeles", function($scope,$http){
 
 //   });
 
+=======
+var Qcounter = 0;
+
+
+  var res = $http.get('http://localhost:3000/dataFilter');
+
+  res.success(function(data, status, headers, config){
+    $scope.Activelesdata = data;
+    console.log($scope.Activelesdata);
+    var r = Math.floor(Math.random() * 4);
+    console.log(r);
+    GrafiekOptieArray[r]($scope.Activelesdata);
+
+      $scope.nextQ = function(){
+  	Qcounter++;
+  	GrafiekOptieArray[0]($scope.Activelesdata);
+  	console.log(Qcounter);
+  	if(Qcounter == $scope.Activelesdata.length){
+  		Qcounter = 0;
+  }
+  if ($scope.Activelesdata[Qcounter].Answer) {
+  	GrafiekOptieArray[2]($scope.Activelesdata);
+  }
+}
+
+  });
+
+>>>>>>> b8957dd502ddb879cf82652331ef2abe90586225
 
     var GrafiekOptieArray = [];
      var barGrafiek = function(data){
@@ -302,6 +342,7 @@ myApp.controller("Activeles", function($scope,$http){
         data: {
           labels: [],
           datasets: [{
+<<<<<<< HEAD
             label: data[0].Answer1,
             data: [8],
             backgroundColor: "rgba(153,255,51,0.4)"
@@ -315,6 +356,21 @@ myApp.controller("Activeles", function($scope,$http){
             backgroundColor:"rgba(0,153,255,0.4)"
           },{
             label: data[0].RightAnswer,
+=======
+            label: data[Qcounter].Answer1,
+            data: [8],
+            backgroundColor: "rgba(153,255,51,0.4)"
+          }, {
+            label: data[Qcounter].Answer2,
+            data: [4],
+            backgroundColor: "rgba(255,153,0,0.4)"
+          },{
+            label: data[Qcounter].Answer3,
+            data: [1],
+            backgroundColor:"rgba(0,153,255,0.4)"
+          },{
+            label: data[Qcounter].RightAnswer,
+>>>>>>> b8957dd502ddb879cf82652331ef2abe90586225
             data: [5],
             backgroundColor:"rgba(153,0,255,0.4)"
           }]
@@ -336,6 +392,7 @@ myApp.controller("Activeles", function($scope,$http){
     GrafiekOptieArray.push(barGrafiek);
     console.log(GrafiekOptieArray);
 
+<<<<<<< HEAD
 //     var lijnGrafiek = function(data){
 
 //     var ctx = document.getElementById('myChart').getContext('2d');
@@ -410,4 +467,80 @@ myApp.controller("Activeles", function($scope,$http){
 //   // var r = Math.floor(Math.random() * 4);
 //   // console.log(r);
 //   // GrafiekOptieArray[r]();
+=======
+    var lijnGrafiek = function(data){
+
+    var ctx = document.getElementById('myChart').getContext('2d');
+    var myChart = new Chart(ctx, {
+  type: 'line',
+  data: {
+    labels: ['M', 'T', 'W', 'T', 'F', 'S', 'S'],
+    datasets: [{
+      label: 'apples',
+      data: [12, 19, 3, 17, 6, 3, 7],
+      backgroundColor: "rgba(153,255,51,0.4)"
+    }, {
+      label: 'oranges',
+      data: [2, 29, 5, 5, 2, 3, 10],
+      backgroundColor: "rgba(255,153,0,0.4)"
+    }]
+  }
+});
+
+  }
+
+
+  GrafiekOptieArray.push(lijnGrafiek);
+
+  var pieGrafiek = function(data){
+    var ctx = document.getElementById("myChart").getContext('2d');
+var myChart = new Chart(ctx, {
+  type: 'pie',
+  data: {
+    labels: ["M", "T", "W", "T"],
+    datasets: [{
+      backgroundColor: [
+        "#2ecc71",
+        "#3498db",
+        "#95a5a6",
+        "#9b59b6"
+      ],
+      data: [12, 19, 0, 0]
+    }]
+  }
+});
+  }
+
+  GrafiekOptieArray.push(pieGrafiek);
+
+    var doughnutGrafiek = function(data){
+
+    var ctx = document.getElementById("myChart").getContext('2d');
+var myChart = new Chart(ctx, {
+  type: 'doughnut',
+  data: {
+    labels: ["M", "T", "W", "T", "F", "S", "S"],
+    datasets: [{
+      backgroundColor: [
+        "#2ecc71",
+        "#3498db",
+        "#95a5a6",
+        "#9b59b6",
+        "#f1c40f",
+        "#e74c3c",
+        "#34495e"
+      ],
+      data: [12, 19, 3, 17, 28, 24, 7]
+    }]
+  }
+});
+
+  }
+
+  GrafiekOptieArray.push(doughnutGrafiek);
+
+  // var r = Math.floor(Math.random() * 4);
+  // console.log(r);
+  // GrafiekOptieArray[r]();
+>>>>>>> b8957dd502ddb879cf82652331ef2abe90586225
 });

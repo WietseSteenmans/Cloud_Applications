@@ -20,7 +20,6 @@ var io = require('socket.io')(http);
 
 var _ = require("underscore");
 
-
 var url = 'mongodb://localhost:27017/jarfish';
 var originalData;
 
@@ -210,6 +209,7 @@ app.post('/deleteLes', function (req, res) {
   });
 });
 
+
 app.post('/editLes', function(req, res){
   
     mongo.connect(url, function(err, db) {
@@ -222,12 +222,15 @@ app.post('/editLes', function(req, res){
   });
 });
 
+
 var filteredData = [];
 
 //Krijg Course aan, laat eerstre vraag zien en dan volgende enz...
 app.post("/ActivateLessen", function(req, res){
     var results = [];
+
     console.log("Testing, i'm here" + req.body.Coursename);
+
   mongo.connect(url, function(err, db){
     assert.equal(null, err);
     var cursor = db.collection('MultipleChoiceLessen').find();
@@ -253,18 +256,21 @@ app.post("/ActivateLessen", function(req, res){
       var filtered = _.where(originalData, { Coursename: Vragen });
 
       filteredData = filtered;
+
       //res.json(filteredData);
       io.sockets.emit('message', filteredData);
       console.log(filteredData);
     });
   });
-
-});
+    //res.json(filtered);
+      console.log(filtered);
+    });
 
 app.post("/Results", function(req,res){
   console.log(req.body);
   res.json(req.body);
 })
+
 
 app.post("/nextQuestion", function(req, res){
   console.log(req.body);
@@ -311,6 +317,11 @@ io.on('connection', function(socket){
 
 
 
+
+
+app.get('/dataFilter', function(req, res){
+  res.json(filteredData);
+})
 
 app.post('/addCourse', function(req, res){
   console.log(req.body);
@@ -382,3 +393,4 @@ app.use(function (req, res, next) {
 http.listen(3000, function (err) {
     console.log('running server on port 3000');
 });
+
