@@ -8,6 +8,12 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -18,6 +24,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class QuestionActivity extends ActionBarActivity {
 
@@ -48,6 +56,8 @@ public class QuestionActivity extends ActionBarActivity {
         QuestionView.setText(question);
         AnswerView.setText(correctAnswer);
 
+
+        //Next Question
         final Button button = (Button) findViewById(R.id.nextQuestionBtn);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -62,6 +72,46 @@ public class QuestionActivity extends ActionBarActivity {
                 String correctAnswer = rightAnswer.get(questionCounter);
                 QuestionView.setText(question);
                 AnswerView.setText(correctAnswer);
+
+                //Post for next question
+                //String urlPost = "http://192.168.0.177:3000/nextQuestion";
+                String urlPost = "http://10.0.2.2:3000/nextQuestion";
+
+                final String postData = "true";
+
+                StringRequest postRequest = new StringRequest(Request.Method.POST, urlPost,
+                        new Response.Listener<String>() {
+                            @Override
+                            public void onResponse(String response) {
+                                try {
+                                    JSONObject jsonResponse = new JSONObject(response).getJSONObject("form");
+
+//                                    String site = jsonResponse.getString("site");
+//                                    String network = jsonResponse.getString("network");
+//                                    System.out.println("Site: "+site+"\nNetwork: "+network +"hello");
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        },
+                        new Response.ErrorListener() {
+                            @Override
+                            public void onErrorResponse(VolleyError error) {
+                                error.printStackTrace();
+                            }
+                        }
+                ) {
+
+                    @Override
+                    protected Map<String, String> getParams()
+                    {
+                        Map<String, String> params = new HashMap<>();
+                        // the POST parameters:
+                        params.put("NextQuestion", postData);
+                        return params;
+                    }
+                };
+                Volley.newRequestQueue(QuestionActivity.this).add(postRequest);
             }
         });
 
@@ -75,6 +125,8 @@ public class QuestionActivity extends ActionBarActivity {
                 startActivity(intentScanAnswers);
             }
         });
+
+
     }
 
     public String readFromFile() {
