@@ -181,7 +181,7 @@ public class QuestionActivity extends ActionBarActivity {
 
         //Button send an impulse to show the correct answer
         final Button correctAnswerBtn = (Button) findViewById(R.id.correctAnswer);
-        statBtn.setOnClickListener(new View.OnClickListener(){
+        correctAnswerBtn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
                 //Post for results
