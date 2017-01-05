@@ -41,7 +41,7 @@ public class DisplayQuestionsActivity extends ActionBarActivity {
         setContentView(R.layout.activity_display_questions);
 
 
-        ArrayAdapter adapter = new ArrayAdapter<String>(DisplayQuestionsActivity.this, R.layout.activity_listview, data);
+        ArrayAdapter adapter = new ArrayAdapter<String>(DisplayQuestionsActivity.this, R.layout.activity_listview2, data);
         final ListView listView = (ListView) findViewById(R.id.mobile_list);
         listView.setAdapter(adapter);
 

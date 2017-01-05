@@ -10,4 +10,9 @@
     <color name="black">#000</color>
     <color name="blue">#00f</color>
     <color name="red">#f00</color>
+    <color name="limeGreen">#A6E32B</color>
+    <color name="green">#99CC33</color>
+    <color name="white">#F7F7F7</color>
+    <color name="lightBlue">#727BF7</color>
+    <color name="darkBlue">#333A9E</color>
 </resources>

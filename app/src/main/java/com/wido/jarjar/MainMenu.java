@@ -5,7 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.View;
-import android.widget.Button;
+import android.widget.TextView;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -65,16 +65,25 @@ public class MainMenu extends ActionBarActivity {
 
 
         //Lesson Button
-        final Button button = (Button) findViewById(R.id.lessonsBtn);
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+        final TextView textView = (TextView) findViewById(R.id.coursesButton);
 
-                //Navigation to MainActivity(Courses)
+        textView.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view){
                 Intent intentLessons = new Intent(MainMenu.this, MainActivity.class);
                 startActivity(intentLessons);
             }
         });
+//        final Button button = (Button) findViewById(R.id.lessonsBtn);
+//        button.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//
+//                //Navigation to MainActivity(Courses)
+//                Intent intentLessons = new Intent(MainMenu.this, MainActivity.class);
+//                startActivity(intentLessons);
+//            }
+//        });
 
     }
 }

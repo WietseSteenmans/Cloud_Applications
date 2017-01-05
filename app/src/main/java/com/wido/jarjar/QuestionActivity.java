@@ -126,6 +126,105 @@ public class QuestionActivity extends ActionBarActivity {
             }
         });
 
+        //Button Send all the results
+        final Button statBtn = (Button) findViewById(R.id.statButton);
+        statBtn.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view){
+                //Post for results
+                //String urlPost = "http://192.168.0.177:3000/nextQuestion";
+                String urlPost = "http://10.0.2.2:3000/Results";
+
+                final String answer1 = "5";
+                final String answer2 = "15";
+                final String answer3 = "0";
+                final String rightAnswer = "6";
+
+                StringRequest postRequest = new StringRequest(Request.Method.POST, urlPost,
+                        new Response.Listener<String>() {
+                            @Override
+                            public void onResponse(String response) {
+                                try {
+                                    JSONObject jsonResponse = new JSONObject(response).getJSONObject("form");
+
+//                                    String site = jsonResponse.getString("site");
+//                                    String network = jsonResponse.getString("network");
+//                                    System.out.println("Site: "+site+"\nNetwork: "+network +"hello");
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        },
+                        new Response.ErrorListener() {
+                            @Override
+                            public void onErrorResponse(VolleyError error) {
+                                error.printStackTrace();
+                            }
+                        }
+                ) {
+
+                    @Override
+                    protected Map<String, String> getParams()
+                    {
+                        Map<String, String> params = new HashMap<>();
+                        // the POST parameters:
+                        params.put("Answer1", answer1);
+                        params.put("Answer2", answer2);
+                        params.put("Answer3", answer3);
+                        params.put("RightAnswer", rightAnswer);
+                        return params;
+                    }
+                };
+                Volley.newRequestQueue(QuestionActivity.this).add(postRequest);
+            }
+        });
+
+        //Button send an impulse to show the correct answer
+        final Button correctAnswerBtn = (Button) findViewById(R.id.correctAnswer);
+        statBtn.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view){
+                //Post for results
+                //String urlPost = "http://192.168.0.177:3000/nextQuestion";
+                String urlPost = "http://10.0.2.2:3000/CorrectAnswer";
+
+
+                StringRequest postRequest = new StringRequest(Request.Method.POST, urlPost,
+                        new Response.Listener<String>() {
+                            @Override
+                            public void onResponse(String response) {
+                                try {
+                                    JSONObject jsonResponse = new JSONObject(response).getJSONObject("form");
+
+//                                    String site = jsonResponse.getString("site");
+//                                    String network = jsonResponse.getString("network");
+//                                    System.out.println("Site: "+site+"\nNetwork: "+network +"hello");
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        },
+                        new Response.ErrorListener() {
+                            @Override
+                            public void onErrorResponse(VolleyError error) {
+                                error.printStackTrace();
+                            }
+                        }
+                ) {
+
+                    @Override
+                    protected Map<String, String> getParams()
+                    {
+                        Map<String, String> params = new HashMap<>();
+                        // the POST parameters:
+                        params.put("ShowCorrectAnswer", "true");
+                        return params;
+                    }
+                };
+                Volley.newRequestQueue(QuestionActivity.this).add(postRequest);
+            }
+        });
+
 
     }
 
