@@ -62,8 +62,8 @@ public class DisplayQuestionsActivity extends ActionBarActivity {
 
                 //POST test
 
-                //String urlPost = "http://192.168.0.177:3000/ActivateLessen";
-                String urlPost = "http://10.0.2.2:3000/ActivateLessen";
+                String urlPost = "http://192.168.0.177:3000/ActivateLessen";
+                //String urlPost = "http://10.0.2.2:3000/ActivateLessen";
 
                 StringRequest postRequest = new StringRequest(Request.Method.POST, urlPost,
                         new Response.Listener<String>() {
