@@ -259,6 +259,10 @@ myApp.controller("Activeles", function($scope,$http){
       var prevpos = currentpos - 1; 
 
     document.getElementById('labe1').innerHTML = "Answer 1 : " + $scope.Activelesdata[currentpos].Answer1;
+    document.getElementById('labe2').innerHTML = "Answer 2 : " + $scope.Activelesdata[currentpos].Answer2;
+    document.getElementById('labe3').innerHTML = "Answer 3 : " + $scope.Activelesdata[currentpos].Answer3;
+    document.getElementById('labe4').innerHTML = "Answer 4 : " + $scope.Activelesdata[currentpos].RightAnswer;
+    document.getElementById('question').innerHTML = "QuestionKappa? " + $scope.Activelesdata[currentpos].Question;
     //console.log($scope.Activelesdata[0]);
     // var r = Math.floor(Math.random() * 4);
     // console.log(r);
@@ -270,6 +274,10 @@ myApp.controller("Activeles", function($scope,$http){
    currentpos -= 0.5;
    console.log(currentpos);
    document.getElementById('labe1').innerHTML = "Answer 1 : " + $scope.Activelesdata[currentpos].Answer1;
+   document.getElementById('labe2').innerHTML = "Answer 2 : " + $scope.Activelesdata[currentpos].Answer2;
+   document.getElementById('labe3').innerHTML = "Answer 3 : " + $scope.Activelesdata[currentpos].Answer3;
+   document.getElementById('labe4').innerHTML = "Answer 4 : " + $scope.Activelesdata[currentpos].RightAnswer;
+   document.getElementById('question').innerHTML = "QuestionKappa? " + $scope.Activelesdata[currentpos].Question;
     //GrafiekOptieArray[position](data);
   });
 
@@ -316,19 +324,19 @@ myApp.controller("Activeles", function($scope,$http){
           labels: [],
           datasets: [{
             label: $scope.Activelesdata[currentpos].Answer1,
-            data: data.Answer1,
+            data: [data.Answer1],
             backgroundColor: "rgba(153,255,51,0.4)"
           }, {
             label: $scope.Activelesdata[currentpos].Answer2,
-            data: data.Answer2,
+            data: [data.Answer2],
             backgroundColor: "rgba(255,153,0,0.4)"
           },{
             label: $scope.Activelesdata[currentpos].Answer3,
-            data: data.Answer3,
+            data: [data.Answer3],
             backgroundColor:"rgba(0,153,255,0.4)"
           },{
-            label: $scope.Activelesdata[currentpos].Answer1,
-            data: data.RightAnswer,
+            label: $scope.Activelesdata[currentpos].RightAnswer,
+            data: [data.RightAnswer],
             backgroundColor:"rgba(153,0,255,0.4)"
           }]
         },
@@ -336,7 +344,7 @@ myApp.controller("Activeles", function($scope,$http){
               scales: {
                   yAxes: [{
                       ticks: {
-                          max: 10,
+                          max: 20,
                           min: 0,
                           stepSize: 1
                       }
