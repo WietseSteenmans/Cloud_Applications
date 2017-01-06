@@ -268,7 +268,6 @@ public class QuestionActivity extends ActionBarActivity {
                 String nickname = jresponse.getString("Coursename");
                 String question = jresponse.getString("Question");
                 String correctAnswer = jresponse.getString("RightAnswer");
-                String yesnoAnswer = jresponse.getString("Answer1");
 
 
                 //Filter on the clicked course
@@ -276,7 +275,6 @@ public class QuestionActivity extends ActionBarActivity {
                 {
                     data.add(question);
                     rightAnswer.add(correctAnswer);
-                    rightAnswer.add(yesnoAnswer);
                 }
                 else
                     Log.d("Course", nickname);
