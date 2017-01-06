@@ -120,7 +120,7 @@ app.post("/YesNoLessen",function(req,res){
 	var yesnoles = {
     Coursename: req.body.Coursename,
     Question: req.body.Question,
-    Answer: req.body.Answer.value,
+    RightAnswer: req.body.RightAnswer.value,
   };
 
   console.log(yesnoles);
@@ -229,8 +229,6 @@ var filteredData = [];
 app.post("/ActivateLessen", function(req, res){
     var results = [];
 
-    console.log("Testing, i'm here" + req.body.Coursename);
-
   mongo.connect(url, function(err, db){
     assert.equal(null, err);
     var cursor = db.collection('MultipleChoiceLessen').find();
@@ -263,12 +261,26 @@ app.post("/ActivateLessen", function(req, res){
     });
   });
     //res.json(filtered);
-      console.log(filtered);
+      //console.log(filtered);
     });
+
+
+// io.on('connection', function(socket){
+//   console.log('A user connected');
+//   //Send a message when 
+//   // setTimeout(function(){
+//   //   //Sending an object when emmiting an event
+//   // socket.emit('testerEvent', { description: 'A custom event named testerEvent!'});
+//   // }, 4000);
+//   socket.on('disconnect', function () {
+//     console.log('A user disconnected');
+//   });
+// });
 
 app.post("/Results", function(req,res){
   console.log(req.body);
-  res.json(req.body);
+  //res.json(req.body);
+  io.sockets.emit('Answers', req.body);
 })
 
 
@@ -296,26 +308,6 @@ app.post("/nextQuestion", function(req, res){
 //       socket.emit('ticker', 'Test');
 //     });
 // });
-
-
-io.on('connection', function(socket){
-  console.log('A user connected');
-  //Send a message when 
-  setTimeout(function(){
-    //Sending an object when emmiting an event
-  socket.emit('testerEvent', { description: 'A custom event named testerEvent!'});
-  }, 4000);
-  socket.on('disconnect', function () {
-    console.log('A user disconnected');
-  });
-});
-
-
-
-
-
-
-
 
 
 

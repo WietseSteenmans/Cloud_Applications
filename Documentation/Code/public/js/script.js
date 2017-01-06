@@ -97,7 +97,7 @@ myApp.controller("QuestionCtrl", function($scope,$http){
      var dataObj = {
       Coursename : $scope.Coursename,
       Question : $scope.Vraag,
-      Answer : $scope.Choice
+      RightAnswer : $scope.Choice
      };
 
      console.log(dataObj.Coursename);
@@ -247,20 +247,35 @@ myApp.controller("LessenController", function($scope,$http){
 
 myApp.controller("Activeles", function($scope,$http){
 
+  var currentpos = 0;
+
     var socket = io('http://localhost');
-  socket.on('message', function(data) {
-    console.log(data);
-    var r = Math.floor(Math.random() * 4);
-    console.log(r);
-    GrafiekOptieArray[0](data);
+    socket.on('message', function(data) {
+      var div = document.getElementById('ExplainDiv');
+        div.style.display = "none";
+      var divv = document.getElementById('quetionsdiv');
+        divv.style.display = 'block';
+      $scope.Activelesdata = data;
+      var prevpos = currentpos - 1; 
+
+    document.getElementById('labe1').innerHTML = "Answer 1 : " + $scope.Activelesdata[currentpos].Answer1;
+    //console.log($scope.Activelesdata[0]);
+    // var r = Math.floor(Math.random() * 4);
+    // console.log(r);
+    // GrafiekOptieArray[0](data);
   });
 
   socket.on('nextQ', function(data){
-    console.log(data);
-    var position = 0;
-    position += data;
-    console.log(position);
+   currentpos += data;
+   currentpos -= 0.5;
+   console.log(currentpos);
+   document.getElementById('labe1').innerHTML = "Answer 1 : " + $scope.Activelesdata[currentpos].Answer1;
     //GrafiekOptieArray[position](data);
+  });
+
+  socket.on('Answers', function(data){
+    console.log(data);
+    GrafiekOptieArray[0](data);
   });
 
 // var Qcounter = 0;
@@ -300,20 +315,20 @@ myApp.controller("Activeles", function($scope,$http){
         data: {
           labels: [],
           datasets: [{
-            label: data[0].Answer1,
-            data: [8],
+            label: $scope.Activelesdata[currentpos].Answer1,
+            data: data.Answer1,
             backgroundColor: "rgba(153,255,51,0.4)"
           }, {
-            label: data[0].Answer2,
-            data: [4],
+            label: $scope.Activelesdata[currentpos].Answer2,
+            data: data.Answer2,
             backgroundColor: "rgba(255,153,0,0.4)"
           },{
-            label: data[0].Answer3,
-            data: [1],
+            label: $scope.Activelesdata[currentpos].Answer3,
+            data: data.Answer3,
             backgroundColor:"rgba(0,153,255,0.4)"
           },{
-            label: data[0].RightAnswer,
-            data: [5],
+            label: $scope.Activelesdata[currentpos].Answer1,
+            data: data.RightAnswer,
             backgroundColor:"rgba(153,0,255,0.4)"
           }]
         },
