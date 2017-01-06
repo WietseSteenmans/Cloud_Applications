@@ -261,15 +261,22 @@ public class QuestionActivity extends ActionBarActivity {
             for (int i = 0; i < response.length(); i++) {
                 JSONObject jresponse = response.getJSONObject(i);
 
+                //Log the whole response
+                String Everything = jresponse.toString();
+                Log.d("the whole jresponse: ", Everything);
+
                 String nickname = jresponse.getString("Coursename");
                 String question = jresponse.getString("Question");
                 String correctAnswer = jresponse.getString("RightAnswer");
-                String Answer = jresponse.getString("Answer1");
+                String yesnoAnswer = jresponse.getString("Answer1");
 
+
+                //Filter on the clicked course
                 if (nickname.equals(message))
                 {
                     data.add(question);
                     rightAnswer.add(correctAnswer);
+                    rightAnswer.add(yesnoAnswer);
                 }
                 else
                     Log.d("Course", nickname);

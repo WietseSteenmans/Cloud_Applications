@@ -108,6 +108,9 @@ public class DisplayQuestionsActivity extends ActionBarActivity {
         try{
             InputStream inputStream = openFileInput("config.txt");
 
+            //String outpututu = DisplayQuestionsActivity.this.getFilesDir().getAbsolutePath();
+            //Log.d("path: ", outpututu);
+
             if (inputStream != null){
                 InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
                 BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
