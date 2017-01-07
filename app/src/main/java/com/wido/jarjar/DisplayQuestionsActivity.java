@@ -62,8 +62,8 @@ public class DisplayQuestionsActivity extends ActionBarActivity {
 
                 //POST test
 
-                //String urlPost = "http://192.168.0.177:3000/ActivateLessen";
-                String urlPost = "http://10.0.2.2:3000/ActivateLessen";
+                String urlPost = "http://192.168.0.177:3000/ActivateLessen";
+                //String urlPost = "http://10.0.2.2:3000/ActivateLessen";
 
                 StringRequest postRequest = new StringRequest(Request.Method.POST, urlPost,
                         new Response.Listener<String>() {
@@ -107,6 +107,9 @@ public class DisplayQuestionsActivity extends ActionBarActivity {
 
         try{
             InputStream inputStream = openFileInput("config.txt");
+
+            //String outpututu = DisplayQuestionsActivity.this.getFilesDir().getAbsolutePath();
+            //Log.d("path: ", outpututu);
 
             if (inputStream != null){
                 InputStreamReader inputStreamReader = new InputStreamReader(inputStream);

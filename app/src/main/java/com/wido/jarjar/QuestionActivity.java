@@ -74,6 +74,7 @@ public class QuestionActivity extends ActionBarActivity {
                 AnswerView.setText(correctAnswer);
 
                 //Post for next question
+
                 //String urlPost = "http://192.168.0.177:3000/nextQuestion";
                 String urlPost = "http://10.42.0.1:3000/nextQuestion";
 
@@ -132,6 +133,7 @@ public class QuestionActivity extends ActionBarActivity {
             @Override
             public void onClick(View view){
                 //Post for results
+
                 //String urlPost = "http://192.168.0.177:3000/nextQuestion";
                 String urlPost = "http://10.42.0.1:3000/Results";
 
@@ -261,11 +263,16 @@ public class QuestionActivity extends ActionBarActivity {
             for (int i = 0; i < response.length(); i++) {
                 JSONObject jresponse = response.getJSONObject(i);
 
+                //Log the whole response
+                String Everything = jresponse.toString();
+                Log.d("the whole jresponse: ", Everything);
+
                 String nickname = jresponse.getString("Coursename");
                 String question = jresponse.getString("Question");
                 String correctAnswer = jresponse.getString("RightAnswer");
-                String Answer = jresponse.getString("Answer1");
 
+
+                //Filter on the clicked course
                 if (nickname.equals(message))
                 {
                     data.add(question);
