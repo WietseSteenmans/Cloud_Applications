@@ -181,6 +181,7 @@ app.get("/GetLessen", function(req, res){
 
 
 app.post("/Vragen", function (req,res) {
+    console.log(req.body);
     var Vragen = req.body.vak;
     var filtered = _.where(originalData, { Coursename: Vragen });
     res.json(filtered);
@@ -208,6 +209,34 @@ app.post('/deleteLes', function (req, res) {
     });
   });
 });
+
+app.post('/deletecourse', function (req, res) {
+
+  var id = req.body;
+  console.log(id);
+  for (var i = 0; i <= id.length -1; i++) {
+    console.log(req.body[i]);
+  mongo.connect(url, function(err, db) {
+    assert.equal(null, err);
+    db.collection('MultipleChoiceLessen').deleteMany(id[i], function(err, result) {
+      assert.equal(null, err);
+      console.log('Item deleted');
+      db.close();
+    });
+  });
+
+    mongo.connect(url, function(err, db) {
+    assert.equal(null, err);
+    db.collection('YesNoLessen').deleteMany(id[i], function(err, result) {
+      assert.equal(null, err);
+      console.log('Item deleted');
+      db.close();
+    });
+  });
+  }
+});
+
+
 
 
 app.post('/editLes', function(req, res){
