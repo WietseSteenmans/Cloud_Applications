@@ -30,7 +30,7 @@ public class MainMenu extends ActionBarActivity {
         //Place To get the data
 
         //String url ="http://192.168.0.177:3000/GetLessen";
-        String url ="http://10.0.2.2:3000/GetLessen";
+        String url ="http://10.42.0.1:3000/GetLessen";
         final JsonArrayRequest jsonObjReq1 = new JsonArrayRequest(Request.Method.GET, url, null, new com.android.volley.Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray response) {

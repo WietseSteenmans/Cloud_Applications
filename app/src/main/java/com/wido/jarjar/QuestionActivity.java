@@ -75,7 +75,7 @@ public class QuestionActivity extends ActionBarActivity {
 
                 //Post for next question
                 //String urlPost = "http://192.168.0.177:3000/nextQuestion";
-                String urlPost = "http://10.0.2.2:3000/nextQuestion";
+                String urlPost = "http://10.42.0.1:3000/nextQuestion";
 
                 final String postData = "true";
 
@@ -133,7 +133,7 @@ public class QuestionActivity extends ActionBarActivity {
             public void onClick(View view){
                 //Post for results
                 //String urlPost = "http://192.168.0.177:3000/nextQuestion";
-                String urlPost = "http://10.0.2.2:3000/Results";
+                String urlPost = "http://10.42.0.1:3000/Results";
 
                 final String answer1 = "5";
                 final String answer2 = "15";
@@ -186,7 +186,7 @@ public class QuestionActivity extends ActionBarActivity {
             public void onClick(View view){
                 //Post for results
                 //String urlPost = "http://192.168.0.177:3000/nextQuestion";
-                String urlPost = "http://10.0.2.2:3000/CorrectAnswer";
+                String urlPost = "http://10.42.0.1:3000/CorrectAnswer";
 
 
                 StringRequest postRequest = new StringRequest(Request.Method.POST, urlPost,
