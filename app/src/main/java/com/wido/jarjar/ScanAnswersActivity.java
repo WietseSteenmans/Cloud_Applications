@@ -17,8 +17,11 @@ import android.view.View;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
 import com.google.android.gms.vision.CameraSource;
+import com.google.android.gms.vision.Detector;
 import com.google.android.gms.vision.MultiProcessor;
 import com.google.android.gms.vision.Tracker;
+import com.google.android.gms.vision.barcode.Barcode;
+import com.google.android.gms.vision.barcode.BarcodeDetector;
 import com.google.android.gms.vision.face.Face;
 import com.google.android.gms.vision.face.FaceDetector;
 import com.wido.jarjar.camera.CameraSourcePreview;
@@ -103,13 +106,23 @@ public class ScanAnswersActivity extends AppCompatActivity {
     private void createCameraSource() {
 
         Context context = getApplicationContext();
-        FaceDetector detector = new FaceDetector.Builder(context)
+
+        /*FaceDetector detector = new FaceDetector.Builder(context)
                 .setClassificationType(FaceDetector.ALL_CLASSIFICATIONS)
                 .build();
 
         detector.setProcessor(
-                new MultiProcessor.Builder<>(new GraphicFaceTrackerFactory())
-                        .build());
+                new MultiProcessor.Builder<>(new GraphicFaceTrackerFactory()).build());*/
+
+
+        // A barcode detector is created to track barcodes.  An associated multi-processor instance
+        // is set to receive the barcode detection results, track the barcodes, and maintain
+        // graphics for each barcode on screen.  The factory is used by the multi-processor to
+        // create a separate tracker instance for each barcode.
+        BarcodeDetector detector = new BarcodeDetector.Builder(context).build();
+        detector.setProcessor(
+                new MultiProcessor.Builder<>(new GraphicBarcodeTrackerFactory()).build()
+        );
 
         if (!detector.isOperational()) {
             // Note: The first time that an app using face API is installed on a device, GMS will
@@ -120,7 +133,7 @@ public class ScanAnswersActivity extends AppCompatActivity {
             // isOperational() can be used to check if the required native library is currently
             // available.  The detector will automatically become operational once the library
             // download completes on device.
-            Log.w(TAG, "Face detector dependencies are not yet available.");
+            Log.w(TAG, "Detector dependencies are not yet available.");
         }
 
         mCameraSource = new CameraSource.Builder(context, detector)
@@ -243,67 +256,73 @@ public class ScanAnswersActivity extends AppCompatActivity {
     // Graphic Face Tracker
     //==============================================================================================
 
+
+
     /**
-     * Factory for creating a face tracker to be associated with a new face.  The multiprocessor
-     * uses this factory to create face trackers as needed -- one for each individual.
+     * Factory for creating a barcode tracker to be associated with a new barcode.  The multiprocessor
+     * uses this factory to create barcode trackers as needed.
      */
-    private class GraphicFaceTrackerFactory implements MultiProcessor.Factory<Face> {
+    private class GraphicBarcodeTrackerFactory implements MultiProcessor.Factory<Barcode>{
         @Override
-        public Tracker<Face> create(Face face) {
-            return new GraphicFaceTracker(mGraphicOverlay);
+        public Tracker<Barcode> create(Barcode barcode){
+            return new GraphicBarcodeTracker(mGraphicOverlay);
         }
     }
 
     /**
-     * Face tracker for each detected individual. This maintains a face graphic within the app's
-     * associated face overlay.
+     * Barcode tracker for each detected barcode. This maintains a barcode graphic within the app's associated barcode overlay.
      */
-    private class GraphicFaceTracker extends Tracker<Face> {
+    private class GraphicBarcodeTracker extends Tracker<Barcode>{
         private GraphicOverlay mOverlay;
-        private FaceGraphic mFaceGraphic;
+        private BarcodeGraphic mBarcodeGraphic;
 
-        GraphicFaceTracker(GraphicOverlay overlay) {
+        GraphicBarcodeTracker(GraphicOverlay overlay){
             mOverlay = overlay;
-            mFaceGraphic = new FaceGraphic(overlay);
+            mBarcodeGraphic = new BarcodeGraphic(overlay);
+        }
+
+
+        /**
+         * Start tracking the detected item instance within the item overlay.
+         */
+        @Override
+        public void onNewItem(int barcodeId, Barcode item) {
+            mBarcodeGraphic.setId(barcodeId);
         }
 
         /**
-         * Start tracking the detected face instance within the face overlay.
+         * Update the position/characteristics of the item within the overlay.
          */
         @Override
-        public void onNewItem(int faceId, Face item) {
-            mFaceGraphic.setId(faceId);
+        public void onUpdate(BarcodeDetector.Detections<Barcode> detectionResults, Barcode barcode) {
+            mOverlay.add(mBarcodeGraphic);
+            mBarcodeGraphic.updateItem(barcode);
         }
 
-        /**
-         * Update the position/characteristics of the face within the overlay.
-         */
-        @Override
-        public void onUpdate(FaceDetector.Detections<Face> detectionResults, Face face) {
-            mOverlay.add(mFaceGraphic);
-            mFaceGraphic.updateFace(face);
-        }
 
         /**
          * Hide the graphic when the corresponding face was not detected.  This can happen for
-         * intermediate frames temporarily (e.g., if the face was momentarily blocked from
-         * view).
+         * intermediate frames temporarily, for example if the face was momentarily blocked from
+         * view.
          */
         @Override
-        public void onMissing(FaceDetector.Detections<Face> detectionResults) {
-            mOverlay.remove(mFaceGraphic);
+        public void onMissing(BarcodeDetector.Detections<Barcode> detectionResults) {
+            mOverlay.remove(mBarcodeGraphic);
         }
 
         /**
-         * Called when the face is assumed to be gone for good. Remove the graphic annotation from
+         * Called when the item is assumed to be gone for good. Remove the graphic annotation from
          * the overlay.
          */
         @Override
         public void onDone() {
-            mOverlay.remove(mFaceGraphic);
+            mOverlay.remove(mBarcodeGraphic);
         }
+    }
 
     /*
+    _____________________________________________________
+    //Basic google vision tutorial! (Scans the QR code from a picture when you push the
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -344,5 +363,4 @@ public class ScanAnswersActivity extends AppCompatActivity {
 
     }
     */
-    }
 }
