@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -25,6 +26,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.ListIterator;
 import java.util.Map;
 
 public class QuestionActivity extends ActionBarActivity {
@@ -65,9 +67,15 @@ public class QuestionActivity extends ActionBarActivity {
                 if (questionCounter < data.size()-1){
                     questionCounter++;
                 }
-                else
-                    questionCounter = 0;
+//                else
+//                    questionCounter = 0;
 
+                ListIterator<String> iterator = data.listIterator();
+                while (iterator.hasNext()){
+                    if(!iterator.hasNext()){
+                        Toast.makeText(getApplicationContext(), "The End of your Questions", Toast.LENGTH_SHORT).show();
+                    }
+                }
                 String question = data.get(questionCounter);
                 //String correctAnswer = rightAnswer.get(questionCounter);
                 QuestionView.setText(question);
@@ -75,8 +83,8 @@ public class QuestionActivity extends ActionBarActivity {
 
                 //Post for next question
 
-                //String urlPost = "http://192.168.0.177:3000/nextQuestion";
-                String urlPost = "http://10.42.0.1:3000/nextQuestion";
+                String urlPost = "http://192.168.0.178:3000/nextQuestion";
+                //String urlPost = "http://10.42.0.1:3000/nextQuestion";
 
                 final String postData = "true";
 
@@ -134,8 +142,8 @@ public class QuestionActivity extends ActionBarActivity {
             public void onClick(View view){
                 //Post for results
 
-                //String urlPost = "http://192.168.0.177:3000/nextQuestion";
-                String urlPost = "http://10.42.0.1:3000/Results";
+                String urlPost = "http://192.168.0.178:3000/nextQuestion";
+                //String urlPost = "http://10.42.0.1:3000/Results";
 
                 final String answer1 = "5";
                 final String answer2 = "15";
@@ -187,8 +195,8 @@ public class QuestionActivity extends ActionBarActivity {
             @Override
             public void onClick(View view){
                 //Post for results
-                //String urlPost = "http://192.168.0.177:3000/nextQuestion";
-                String urlPost = "http://10.42.0.1:3000/CorrectAnswer";
+                String urlPost = "http://192.168.0.178:3000/nextQuestion";
+                //String urlPost = "http://10.42.0.1:3000/CorrectAnswer";
 
 
                 StringRequest postRequest = new StringRequest(Request.Method.POST, urlPost,
