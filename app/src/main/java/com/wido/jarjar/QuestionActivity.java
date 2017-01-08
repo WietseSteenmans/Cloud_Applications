@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -62,18 +63,16 @@ public class QuestionActivity extends ActionBarActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if (questionCounter == data.size()-1)
+                {
+                    Toast.makeText(getApplicationContext(), "The End of your Questions", Toast.LENGTH_SHORT).show();
+                }
                 if (questionCounter < data.size()-1){
                     questionCounter++;
                 }
 //                else
 //                    questionCounter = 0;
 
-//                ListIterator<String> iterator = data.listIterator();
-//                while (iterator.hasNext()){
-//                    if(!iterator.hasNext()){
-//                        Toast.makeText(getApplicationContext(), "The End of your Questions", Toast.LENGTH_SHORT).show();
-//                    }
-//                }
                 String question = data.get(questionCounter);
                 String correctAnswer = rightAnswer.get(questionCounter);
                 QuestionView.setText(question);
