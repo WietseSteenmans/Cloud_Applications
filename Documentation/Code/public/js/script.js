@@ -198,35 +198,35 @@ myApp.controller("LessenController", function($scope,$http){
     });
   };
 
-  $scope.deletecourse = function(x, array){
+  $scope.deletecourse = function(x, array, index){
     console.log(x);
+    console.log(array);
+    console.log(index);
 
     var dataObj = {
       vak : x
     }
 
-    var courseids = [];
+    // var courseids = [];
 
-    var res = $http.post('http://localhost:3000/Vragen', dataObj);
+    // var res = $http.post('http://localhost:3000/Vragen', dataObj);
 
-    res.success(function(data, status, headers, config){
-      $scope.data = data;
-      console.log($scope.data)
+    // res.success(function(data, status, headers, config){
+    //   $scope.data = data;
+    //   console.log($scope.data)
 
-      for (var i = 0; i <= $scope.data.length -1; i++) {
-        courseids.push($scope.data[i]._id);
-        array.splice(i, 1);
-      }
 
-      console.log(courseids);
+      // console.log(courseids);
 
-    var ress = $http.post('http://localhost:3000/deletecourse', courseids);
+    var ress = $http.post('http://localhost:3000/deletecourse', dataObj);
 
     ress.success(function(data, status, headers, config){
       $scope.data = data;
       console.log(data);
-    })  
-    })
+
+    });  
+    array.splice(index, 1);
+    // })
   }
   // Random Colored Buttons
   $scope.doc_classes_colors = [
