@@ -14,7 +14,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Show The Correct Awnser"
-        android:id="@+id/correctAnswer"
+        android:id="@+id/correctAnswerBtn"
         android:layout_centerVertical="true"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true" />
@@ -24,7 +24,7 @@
         android:layout_height="wrap_content"
         android:text="Show The Statistics"
         android:id="@+id/statButton"
-        android:layout_below="@+id/correctAnswer"
+        android:layout_below="@+id/correctAnswerBtn"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true" />
     <Button
@@ -55,7 +55,7 @@
         android:id="@+id/answerView"
         android:textSize="18sp"
         android:layout_marginBottom="17dp"
-        android:layout_above="@+id/correctAnswer"
+        android:layout_above="@+id/correctAnswerBtn"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true" />
 
