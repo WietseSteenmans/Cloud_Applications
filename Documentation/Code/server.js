@@ -212,13 +212,13 @@ app.post('/deleteLes', function (req, res) {
 
 app.post('/deletecourse', function (req, res) {
 
-  var id = req.body;
+  var id = req.body.vak;
   console.log(id);
-  for (var i = 0; i <= id.length -1; i++) {
-    console.log(req.body[i]);
+  //for (var i = 0; i <= id.length; i++) {
+    //console.log(req.body[i]);
   mongo.connect(url, function(err, db) {
     assert.equal(null, err);
-    db.collection('MultipleChoiceLessen').deleteMany(id[i], function(err, result) {
+    db.collection('MultipleChoiceLessen').deleteMany({"Coursename": id}, function(err, result) {
       assert.equal(null, err);
       console.log('Item deleted');
       db.close();
@@ -227,13 +227,13 @@ app.post('/deletecourse', function (req, res) {
 
     mongo.connect(url, function(err, db) {
     assert.equal(null, err);
-    db.collection('YesNoLessen').deleteMany(id[i], function(err, result) {
+    db.collection('YesNoLessen').deleteMany({"Coursename": id}, function(err, result) {
       assert.equal(null, err);
       console.log('Item deleted');
       db.close();
     });
   });
-  }
+  //}
 });
 
 
@@ -344,17 +344,17 @@ app.get('/dataFilter', function(req, res){
   res.json(filteredData);
 })
 
-app.post('/addCourse', function(req, res){
-  console.log(req.body);
-    mongo.connect(url, function(err, db) {
-    assert.equal(null,err);
-    db.collection('rogueCourses').insertOne(req.body, function(err, result) {
-      assert.equal(null,err);
-      console.log('Item inserted');
-      db.close();
-    });
-  });
-})
+// app.post('/addCourse', function(req, res){
+//   console.log(req.body);
+//     mongo.connect(url, function(err, db) {
+//     assert.equal(null,err);
+//     db.collection('rogueCourses').insertOne(req.body, function(err, result) {
+//       assert.equal(null,err);
+//       console.log('Item inserted');
+//       db.close();
+//     });
+//   });
+// })
 //  app.post('/Register', function(req, res){
 //  	console.log(req.body);
 //  	dbaccount.accountstorage.insert(req.body,function(err,doc){

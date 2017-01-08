@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -48,13 +49,13 @@ public class QuestionActivity extends ActionBarActivity {
         showQuestions(message);
 
         QuestionView = (TextView) findViewById(R.id.questionView);
-        //AnswerView = (TextView) findViewById(R.id.answerView);
+        AnswerView = (TextView) findViewById(R.id.answerView);
 
         final String question = data.get(questionCounter);
-        //final String correctAnswer = rightAnswer.get(questionCounter);
+        final String correctAnswer = rightAnswer.get(questionCounter);
 
         QuestionView.setText(question);
-        //AnswerView.setText(correctAnswer);
+        AnswerView.setText(correctAnswer);
 
 
         //Next Question
@@ -62,21 +63,25 @@ public class QuestionActivity extends ActionBarActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if (questionCounter == data.size()-1)
+                {
+                    Toast.makeText(getApplicationContext(), "The End of your Questions", Toast.LENGTH_SHORT).show();
+                }
                 if (questionCounter < data.size()-1){
                     questionCounter++;
                 }
-                else
-                    questionCounter = 0;
+//                else
+//                    questionCounter = 0;
 
                 String question = data.get(questionCounter);
-                //String correctAnswer = rightAnswer.get(questionCounter);
+                String correctAnswer = rightAnswer.get(questionCounter);
                 QuestionView.setText(question);
-                //AnswerView.setText(correctAnswer);
+                AnswerView.setText(correctAnswer);
 
                 //Post for next question
 
-                //String urlPost = "http://192.168.0.177:3000/nextQuestion";
-                String urlPost = "http://10.42.0.1:3000/nextQuestion";
+                String urlPost = "http://192.168.0.178:3000/nextQuestion";
+                //String urlPost = "http://10.42.0.1:3000/nextQuestion";
 
                 final String postData = "true";
 
@@ -134,13 +139,16 @@ public class QuestionActivity extends ActionBarActivity {
             public void onClick(View view){
                 //Post for results
 
-                //String urlPost = "http://192.168.0.177:3000/nextQuestion";
-                String urlPost = "http://10.42.0.1:3000/Results";
+                String urlPost = "http://192.168.0.178:3000/Results";
+                //String urlPost = "http://10.42.0.1:3000/Results";
 
                 final String answer1 = "5";
                 final String answer2 = "15";
                 final String answer3 = "0";
                 final String rightAnswer = "6";
+
+                final String noAnswer = "1";
+                final String yesAnswer = "2";
 
                 StringRequest postRequest = new StringRequest(Request.Method.POST, urlPost,
                         new Response.Listener<String>() {
@@ -168,13 +176,25 @@ public class QuestionActivity extends ActionBarActivity {
                     @Override
                     protected Map<String, String> getParams()
                     {
-                        Map<String, String> params = new HashMap<>();
-                        // the POST parameters:
-                        params.put("Answer1", answer1);
-                        params.put("Answer2", answer2);
-                        params.put("Answer3", answer3);
-                        params.put("RightAnswer", rightAnswer);
-                        return params;
+                        final TextView answerView = (TextView) findViewById(R.id.answerView);
+
+                        String contextAnswer = answerView.getText().toString();
+                        if (contextAnswer.equals("Yes") || contextAnswer.equals("No"))
+                        {
+                            Map<String, String> params = new HashMap<>();
+                            params.put("No", noAnswer);
+                            params.put("Yes", yesAnswer);
+                            return params;
+                        }else
+                        {
+                            Map<String, String> params = new HashMap<>();
+                            // the POST parameters:
+                            params.put("Answer1", answer1);
+                            params.put("Answer2", answer2);
+                            params.put("Answer3", answer3);
+                            params.put("RightAnswer", rightAnswer);
+                            return params;
+                        }
                     }
                 };
                 Volley.newRequestQueue(QuestionActivity.this).add(postRequest);
@@ -182,13 +202,13 @@ public class QuestionActivity extends ActionBarActivity {
         });
 
         //Button send an impulse to show the correct answer
-        final Button correctAnswerBtn = (Button) findViewById(R.id.correctAnswer);
+        final Button correctAnswerBtn = (Button) findViewById(R.id.correctAnswerBtn);
         correctAnswerBtn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
                 //Post for results
-                //String urlPost = "http://192.168.0.177:3000/nextQuestion";
-                String urlPost = "http://10.42.0.1:3000/CorrectAnswer";
+                String urlPost = "http://192.168.0.178:3000/CorrectAnswer";
+                //String urlPost = "http://10.42.0.1:3000/CorrectAnswer";
 
 
                 StringRequest postRequest = new StringRequest(Request.Method.POST, urlPost,
@@ -269,14 +289,14 @@ public class QuestionActivity extends ActionBarActivity {
 
                 String nickname = jresponse.getString("Coursename");
                 String question = jresponse.getString("Question");
-                //String correctAnswer = jresponse.getString("RightAnswer");
+                String correctAnswer = jresponse.getString("RightAnswer");
 
 
                 //Filter on the clicked course
                 if (nickname.equals(message))
                 {
                     data.add(question);
-                    //rightAnswer.add(correctAnswer);
+                    rightAnswer.add(correctAnswer);
                 }
                 else
                     Log.d("Course", nickname);
