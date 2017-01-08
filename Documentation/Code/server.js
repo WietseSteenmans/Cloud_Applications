@@ -218,7 +218,7 @@ app.post('/deletecourse', function (req, res) {
     console.log(req.body[i]);
   mongo.connect(url, function(err, db) {
     assert.equal(null, err);
-    db.collection('MultipleChoiceLessen').deleteMany(id[i], function(err, result) {
+    db.collection('MultipleChoiceLessen').deleteOne(id[i], function(err, result) {
       assert.equal(null, err);
       console.log('Item deleted');
       db.close();
@@ -227,7 +227,7 @@ app.post('/deletecourse', function (req, res) {
 
     mongo.connect(url, function(err, db) {
     assert.equal(null, err);
-    db.collection('YesNoLessen').deleteMany(id[i], function(err, result) {
+    db.collection('YesNoLessen').deleteOne(id[i], function(err, result) {
       assert.equal(null, err);
       console.log('Item deleted');
       db.close();
