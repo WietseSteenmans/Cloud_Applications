@@ -66,7 +66,6 @@
                   <a ng-click="send(x)"><h3 class="title">{{x}}</h3></a>
 
                   <div class="optionsTile">
-                    <a class="glyphicon glyphicon-pencil"></a>
                     <a class="glyphicon glyphicon-remove" ng-click="deletecourse(x, Data, $index)"></a>
                   </div>
                 </div>
@@ -109,8 +108,8 @@
                 <tr class="tableItem" ng-repeat="x in response">
                   <td class="col-xs-8"><div contenteditable>{{x.Question}}</div></td>
                   <td class="col-xs-2"><div contenteditable>{{x.RightAnswer}}</div></td>
-                  <td class="col-xs-1"><button ng-click="delete(response, $index)" type="button" value="button">Remove</button></td>
-                  <td class="col-xs-1"><button ng-click="" type="button" value="button">Edit</button></td>
+                  <td class="col-xs-1"><button ng-click="delete(response, $index)" type="button" value="button" class="blackBtn">Remove</button></td>
+                  <td class="col-xs-1"><button ng-click="" type="button" value="button" class="blackBtn">Edit</button></td>
                 </tr>
               </tbody>
           </table>
