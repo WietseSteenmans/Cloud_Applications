@@ -48,13 +48,13 @@ public class QuestionActivity extends ActionBarActivity {
         showQuestions(message);
 
         QuestionView = (TextView) findViewById(R.id.questionView);
-        AnswerView = (TextView) findViewById(R.id.answerView);
+        //AnswerView = (TextView) findViewById(R.id.answerView);
 
         final String question = data.get(questionCounter);
-        final String correctAnswer = rightAnswer.get(questionCounter);
+        //final String correctAnswer = rightAnswer.get(questionCounter);
 
         QuestionView.setText(question);
-        AnswerView.setText(correctAnswer);
+        //AnswerView.setText(correctAnswer);
 
 
         //Next Question
@@ -69,9 +69,9 @@ public class QuestionActivity extends ActionBarActivity {
                     questionCounter = 0;
 
                 String question = data.get(questionCounter);
-                String correctAnswer = rightAnswer.get(questionCounter);
+                //String correctAnswer = rightAnswer.get(questionCounter);
                 QuestionView.setText(question);
-                AnswerView.setText(correctAnswer);
+                //AnswerView.setText(correctAnswer);
 
                 //Post for next question
 
@@ -269,14 +269,14 @@ public class QuestionActivity extends ActionBarActivity {
 
                 String nickname = jresponse.getString("Coursename");
                 String question = jresponse.getString("Question");
-                String correctAnswer = jresponse.getString("RightAnswer");
+                //String correctAnswer = jresponse.getString("RightAnswer");
 
 
                 //Filter on the clicked course
                 if (nickname.equals(message))
                 {
                     data.add(question);
-                    rightAnswer.add(correctAnswer);
+                    //rightAnswer.add(correctAnswer);
                 }
                 else
                     Log.d("Course", nickname);
@@ -284,5 +284,31 @@ public class QuestionActivity extends ActionBarActivity {
         } catch (JSONException e) {
             e.printStackTrace();
         }
+    }
+
+    public String checkYesOrNo(){
+        String YesOrNo = "";
+        try {
+            JSONArray response = new JSONArray(readFromFile());
+
+
+
+            for (int i = 0; i < response.length(); i++) {
+                JSONObject jresponse = response.getJSONObject(i);
+
+                String correctAnswer = jresponse.getString("RightAnswer");
+
+
+                if(correctAnswer.equals("Yes") || correctAnswer.equals("No")){
+                    YesOrNo = "true";
+                }else {
+                    YesOrNo = "false";
+                }
+
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return YesOrNo;
     }
 }
