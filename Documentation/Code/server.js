@@ -344,17 +344,17 @@ app.get('/dataFilter', function(req, res){
   res.json(filteredData);
 })
 
-app.post('/addCourse', function(req, res){
-  console.log(req.body);
-    mongo.connect(url, function(err, db) {
-    assert.equal(null,err);
-    db.collection('rogueCourses').insertOne(req.body, function(err, result) {
-      assert.equal(null,err);
-      console.log('Item inserted');
-      db.close();
-    });
-  });
-})
+// app.post('/addCourse', function(req, res){
+//   console.log(req.body);
+//     mongo.connect(url, function(err, db) {
+//     assert.equal(null,err);
+//     db.collection('rogueCourses').insertOne(req.body, function(err, result) {
+//       assert.equal(null,err);
+//       console.log('Item inserted');
+//       db.close();
+//     });
+//   });
+// })
 //  app.post('/Register', function(req, res){
 //  	console.log(req.body);
 //  	dbaccount.accountstorage.insert(req.body,function(err,doc){

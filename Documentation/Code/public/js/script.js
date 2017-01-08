@@ -167,19 +167,19 @@ myApp.controller("LessenController", function($scope,$http){
 
   }
 
-  $scope.NewCourse = function(){
+  // $scope.NewCourse = function(){
 
-    var dataObj = {
-      Coursename : $scope.NewCourseName
-    }
+  //   var dataObj = {
+  //     Coursename : $scope.NewCourseName
+  //   }
 
-     var res = $http.post('http://localhost:3000/addCourse', dataObj)
+  //    var res = $http.post('http://localhost:3000/addCourse', dataObj)
 
-     res.success(function(data, status, headers, config) {
-        $scope.testdata = data;
-        console.log($scope.testdata);
-     });
-  };
+  //    res.success(function(data, status, headers, config) {
+  //       $scope.testdata = data;
+  //       console.log($scope.testdata);
+  //    });
+  // };
 
   $scope.delete = function(array, index){
     console.log(array[index]._id);
