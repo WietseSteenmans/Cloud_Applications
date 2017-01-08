@@ -107,8 +107,8 @@
               </thead>
               <tbody>
                 <tr class="tableItem" ng-repeat="x in response">
-                  <td class="col-xs-8">{{x.Question}}</td>
-                  <td class="col-xs-2">{{x.Answer}} {{x.RightAnswer}}</td>
+                  <td class="col-xs-8"><div contenteditable>{{x.Question}}</div></td>
+                  <td class="col-xs-2"><div contenteditable>{{x.RightAnswer}}</div></td>
                   <td class="col-xs-1"><button ng-click="delete(response, $index)" type="button" value="button">Remove</button></td>
                   <td class="col-xs-1"><button ng-click="" type="button" value="button">Edit</button></td>
                 </tr>
