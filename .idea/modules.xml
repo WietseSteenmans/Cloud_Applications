@@ -3,7 +3,6 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/Cloud_Applications.iml" filepath="$PROJECT_DIR$/Cloud_Applications.iml" />
-      <module fileurl="file://$PROJECT_DIR$/JarJar.iml" filepath="$PROJECT_DIR$/JarJar.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>
