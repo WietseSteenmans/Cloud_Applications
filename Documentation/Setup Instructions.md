@@ -17,3 +17,4 @@ Follow these steps to get this project up and running.
 
 ### Troubleshooting
 - Make sure that nothing is blocking communication between the site and the Android app.
+- Make sure you have the latest version of Android Studio.
