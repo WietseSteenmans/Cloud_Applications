@@ -132,6 +132,7 @@ public class QuestionActivity extends ActionBarActivity {
             }
         });
 
+        /*
         //Button Send all the results
         final Button statBtn = (Button) findViewById(R.id.statButton);
         statBtn.setOnClickListener(new View.OnClickListener(){
@@ -200,6 +201,8 @@ public class QuestionActivity extends ActionBarActivity {
                 Volley.newRequestQueue(QuestionActivity.this).add(postRequest);
             }
         });
+
+        */
 
         //Button send an impulse to show the correct answer
         final Button correctAnswerBtn = (Button) findViewById(R.id.correctAnswerBtn);
