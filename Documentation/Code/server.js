@@ -96,6 +96,7 @@ app.post("/MultipleChoiceLessen",function(req,res){
 	var multiplechoiceles = {
     Coursename: req.body.Coursename,
     Question: req.body.Question,
+    QuestionType : req.body.QuestionType,
     Answer1: req.body.Antwoord1,
     Answer2: req.body.Antwoord2,
     Answer3: req.body.Antwoord3,
@@ -120,6 +121,7 @@ app.post("/YesNoLessen",function(req,res){
 	var yesnoles = {
     Coursename: req.body.Coursename,
     Question: req.body.Question,
+    QuestionType : req.body.QuestionType,
     RightAnswer: req.body.RightAnswer.value,
   };
 
@@ -243,13 +245,16 @@ app.post('/editLes', function(req, res){
   console.log(req.body);
   var id = req.body.id;
   item = {
-    Answer1 : req.body.Answer1,
-    Answer2 : req.body.Answer2,
-    Answer3 : req.body.Answer3,
+    Answer1 : req.body.Antwoord1,
+    Answer2 : req.body.Antwoord2,
+    Answer3 : req.body.Antwoord3,
     Coursename : req.body.Coursename,
     Question : req.body.Question,
+    QuestionType : req.body.QuestionType,
     RightAnswer : req.body.RightAnswer
   };
+
+  console.log(item);
 
   
     mongo.connect(url, function(err, db) {
@@ -336,6 +341,10 @@ app.post("/Results", function(req,res){
 app.post("/nextQuestion", function(req, res){
   console.log(req.body);
   io.sockets.emit('nextQ', 1);
+})
+
+app.post("/CorrectAnswer", function(req, res){
+  io.sockets.emit('CorrentQ', 1);
 })
 
 // app.get('/dataFilter', function(req, res){

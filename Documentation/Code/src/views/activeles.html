@@ -13,7 +13,6 @@
 		<link href="/css/styles.css" rel="stylesheet">
 
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
-    <script type="text/javascript" src="/js/script.js"></script>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 		<script src="/js/bootstrap.min.js"></script>
 
@@ -39,25 +38,25 @@
     Time to scan your crowd. Press the button "Scan Answers". When you are done all the answers will be poured in the graph on your website, all this in real-time!
     The application has some other buttons too, check them out. Doing is learning as they say. Have fun!</p>
 </div>
-<div id="quetionsdiv" style="display: none;" >
+<div id="quetionsdiv" >
   <div class="row" >
-    <div class = "col-xs-8 col-xs-push-4" ng-repeat="x in Activelesdata">
-      <h1>Current Lesson: {{x.Coursename}}</h1>
+    <div class = "col-xs-8 col-xs-push-4">
+      <h1 id="Coursename">Current Lesson: {{x.Coursename}}</h1>
     </div>
   </div>
 
   <div class = "row">
     <div class = "col-xs-7 col-xs-push-5">
-      <h2 id="question">QuestionKappa? </h2>
+      <h2 id="question">QuestionKappa? {{x.Question}}</h2>
     </div>
  </div>
 
   <div class="row">
      <div id="answerOptions" class="col-xs-1">
-       <label id="labe1">Answer 1 :</label>
-       <label id="labe2">Answer 2 :{{x.Answer2}}</label>
-       <label id="labe3">Answer 3 :{{x.Answer3}}</label>
-       <label id="labe4">Answer 4 :{{x.RightAnswer}}</label>
+       <div class="gallerycard"><div id="Wrong1"><label id="labe1">Answer 1 :{{x.Answer1}}</label></div></div>
+       <div class="gallerycard"> <div id="Wrong2"><label id="labe2">Answer 2 :{{x.Answer2}}</label></div></div>
+       <div class="gallerycard"><div id="Wrong3"><label id="labe3">Answer 3 :{{x.Answer3}}</label></div></div>
+       <div class="gallerycard"><div id="Right"><label id="labe4">Answer 4 :{{x.RightAnswer}}</label></div></div>
      </div>
 
      <div id="graphDisplay" class="col-xs-11">
@@ -65,11 +64,12 @@
       <canvas id="myChart"></canvas>
    </div>
  </div>
-       <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
-      <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
 </div>
 </div>
   </body>
+      <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+      <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
+      <script type="text/javascript" src="/js/script.js"></script>
 </html>
 
 <!--   <li ng-repeat="item in (filteredItems = (items | filter:query))">

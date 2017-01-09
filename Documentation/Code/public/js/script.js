@@ -67,7 +67,8 @@ myApp.controller("QuestionCtrl", function($scope,$http){
       Antwoord1 : $scope.Answer1,
       Antwoord2 : $scope.Answer2,
       Antwoord3 : $scope.Answer3,
-      RightAnswer : $scope.RightAnswer
+      RightAnswer : $scope.RightAnswer,
+      QuestionType : 'MultipleChoice'
      };
 
 
@@ -97,10 +98,11 @@ myApp.controller("QuestionCtrl", function($scope,$http){
      var dataObj = {
       Coursename : $scope.Coursename,
       Question : $scope.Vraag,
-      RightAnswer : $scope.Choice
+      RightAnswer : $scope.Choice,
+      QuestionType : 'YesNo'
      };
 
-     console.log(dataObj.Coursename);
+     console.log(dataObj);
 
      var res = $http.post('http://localhost:3000/YesNoLessen', dataObj)
 
@@ -118,7 +120,7 @@ myApp.controller("LessenController", function($scope,$http){
     var toedit = [];
 
 
-    var RightAnswer = document.getElementById('RightAnswer');
+  var RightAnswer = document.getElementById('RightAnswer');
 
   var res = $http.get('http://localhost:3000/GetLessen');
 
@@ -205,17 +207,16 @@ myApp.controller("LessenController", function($scope,$http){
 
 
   $scope.edit = function(array, index){
-    console.log("workz");
     var Question = document.getElementById('Question' +index);
     console.log(Question);
     var RightAnswer = document.getElementById('RightAnswer'+index);
     console.log(Question.innerHTML);
     console.log(RightAnswer.innerHTML);
-    //console.log(array[index]);
-    console.log(array[index]._id);
+    console.log(array[index]);
      var dataObj = {
       Coursename : array[index].Coursename,
       Question : Question.innerHTML,
+      QuestionType : array[index].QuestionType,
       Antwoord1 : array[index].Answer1,
       Antwoord2 : array[index].Answer2,
       Antwoord3 : array[index].Answer3,
@@ -326,37 +327,88 @@ myApp.controller("Activeles", function($scope,$http){
       var div = document.getElementById('ExplainDiv');
         div.style.display = "none";
       var divv = document.getElementById('quetionsdiv');
-        divv.style.display = 'block';
+      divv.style.display = 'block';
       $scope.Activelesdata = data;
-      var prevpos = currentpos - 1; 
+      console.log($scope.Activelesdata);   
+    document.getElementById('Coursename').innerHTML = "Course  : " + $scope.Activelesdata[currentpos].Coursename;
+    document.getElementById('labe1').innerHTML = "Answer  : " + $scope.Activelesdata[currentpos].Answer1;
+    document.getElementById('labe2').innerHTML = "Answer  : " + $scope.Activelesdata[currentpos].Answer2;
+    document.getElementById('labe3').innerHTML = "Answer  : " + $scope.Activelesdata[currentpos].Answer3;
+    document.getElementById('labe4').innerHTML = "Answer  : " + $scope.Activelesdata[currentpos].RightAnswer;
+    document.getElementById('question').innerHTML = "Question : " + $scope.Activelesdata[currentpos].Question;
 
-    document.getElementById('labe1').innerHTML = "Answer 1 : " + $scope.Activelesdata[currentpos].Answer1;
-    document.getElementById('labe2').innerHTML = "Answer 2 : " + $scope.Activelesdata[currentpos].Answer2;
-    document.getElementById('labe3').innerHTML = "Answer 3 : " + $scope.Activelesdata[currentpos].Answer3;
-    document.getElementById('labe4').innerHTML = "Answer 4 : " + $scope.Activelesdata[currentpos].RightAnswer;
-    document.getElementById('question').innerHTML = "QuestionKappa? " + $scope.Activelesdata[currentpos].Question;
-    //console.log($scope.Activelesdata[0]);
-    // var r = Math.floor(Math.random() * 4);
-    // console.log(r);
-    // GrafiekOptieArray[0](data);
+    var cards = $(".gallerycard");
+     for(var i = 0; i < cards.length; i++){
+    var target = Math.floor(Math.random() * cards.length -1) + 1;
+    var target2 = Math.floor(Math.random() * cards.length -1) +1;
+    cards.eq(target).before(cards.eq(target2));
+}
+
   });
 
   socket.on('nextQ', function(data){
+   // var ctx = document.getElementById('myChart').getContext('2d');
+   // ctx.clearRect(0, 0, ctx.width, ctx.height);
+    document.getElementById('Wrong1').style.border = "none";
+    document.getElementById('Wrong2').style.border = "none";
+    document.getElementById('Wrong3').style.border = "none";
+    document.getElementById('Right').style.border = "none";
    currentpos += data;
    currentpos -= 0.5;
    console.log(currentpos);
-   document.getElementById('labe1').innerHTML = "Answer 1 : " + $scope.Activelesdata[currentpos].Answer1;
-   document.getElementById('labe2').innerHTML = "Answer 2 : " + $scope.Activelesdata[currentpos].Answer2;
-   document.getElementById('labe3').innerHTML = "Answer 3 : " + $scope.Activelesdata[currentpos].Answer3;
-   document.getElementById('labe4').innerHTML = "Answer 4 : " + $scope.Activelesdata[currentpos].RightAnswer;
-   document.getElementById('question').innerHTML = "QuestionKappa? " + $scope.Activelesdata[currentpos].Question;
+   console.log($scope.Activelesdata[1].RightAnswer);
+   switch($scope.Activelesdata[currentpos].QuestionType){
+    case 'YesNo':
+    document.getElementById('question').innerHTML = "Question : " + $scope.Activelesdata[currentpos].Question;
+    document.getElementById('labe4').innerHTML = "Answer  : " + $scope.Activelesdata[currentpos].RightAnswer;
+    document.getElementById('labe2').style.display = "none";
+   document.getElementById('labe3').style.display = "none";
+    if ($scope.Activelesdata[currentpos].RightAnswer == 'Yes') {
+      document.getElementById('labe1').innerHTML = "Answer  : " + 'No';
+    }
+    else
+      document.getElementById('labe1').innerHTML = "Answer  : " + 'Yes';
+    break;
+    case  'MultipleChoice':
+        document.getElementById('labe1').innerHTML = "Answer  : " + $scope.Activelesdata[currentpos].Answer1;
+        document.getElementById('labe2').innerHTML = "Answer  : " + $scope.Activelesdata[currentpos].Answer2;
+        document.getElementById('labe3').innerHTML = "Answer  : " + $scope.Activelesdata[currentpos].Answer3;
+        document.getElementById('labe4').innerHTML = "Answer  : " + $scope.Activelesdata[currentpos].RightAnswer;
+        document.getElementById('question').innerHTML = "Question : " + $scope.Activelesdata[currentpos].Question;
     //GrafiekOptieArray[position](data);
+    break;
+   }
+
+     var cards = $(".gallerycard");
+     for(var i = 0; i < cards.length; i++){
+    var target = Math.floor(Math.random() * cards.length -1) + 1;
+    var target2 = Math.floor(Math.random() * cards.length -1) +1;
+    cards.eq(target).before(cards.eq(target2));
+}
+
+
   });
 
   socket.on('Answers', function(data){
     console.log(data);
-    GrafiekOptieArray[0](data);
+    switch($scope.Activelesdata[currentpos].QuestionType){
+      case 'MultipleChoice':
+      GrafiekOptieArray[0](data);
+      break;
+      case 'YesNo':
+      GrafiekOptieArray[1](data);
+      break;
+    }
   });
+
+  socket.on('CorrentQ', function(data){
+    document.getElementById('Wrong1').style.border = "thin solid red";
+    document.getElementById('Wrong2').style.border = "thin solid red";
+    document.getElementById('Wrong3').style.border = "thin solid red";
+    document.getElementById('Right').style.border = "thin solid green";
+
+    console.log(data);
+  })
 
 // var Qcounter = 0;
 
@@ -453,26 +505,24 @@ myApp.controller("Activeles", function($scope,$http){
 
 //   GrafiekOptieArray.push(lijnGrafiek);
 
-//   var pieGrafiek = function(data){
-//     var ctx = document.getElementById("myChart").getContext('2d');
-// var myChart = new Chart(ctx, {
-//   type: 'pie',
-//   data: {
-//     labels: ["M", "T", "W", "T"],
-//     datasets: [{
-//       backgroundColor: [
-//         "#2ecc71",
-//         "#3498db",
-//         "#95a5a6",
-//         "#9b59b6"
-//       ],
-//       data: [12, 19, 0, 0]
-//     }]
-//   }
-// });
-//   }
+  var pieGrafiek = function(data){
+    var ctx = document.getElementById("myChart").getContext('2d');
+var myChart = new Chart(ctx, {
+  type: 'pie',
+  data: {
+    labels: ["No", "Yes"],
+    datasets: [{
+      backgroundColor: [
+        "red",
+        "green"
+      ],
+      data: [data.Yes, data.No]
+    }]
+  }
+});
+  }
 
-//   GrafiekOptieArray.push(pieGrafiek);
+  GrafiekOptieArray.push(pieGrafiek);
 
 //     var doughnutGrafiek = function(data){
 

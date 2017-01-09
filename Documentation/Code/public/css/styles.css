@@ -81,6 +81,35 @@ label {
 #ExplainDiv{
   display: block;
 }
+
+#quetionsdiv {
+  display: none;
+}
+
 .blackBtn{
   color: #000000;
+}
+
+#Wrong1 {
+    max-width:50%;
+   min-width:150px;
+   max-height: 75%;
+}
+
+#Wrong2 {
+    max-width:50%;
+   min-width:150px;
+   max-height: 75%;
+}
+
+#Wrong3 {
+    max-width:50%;
+   min-width:150px;
+   max-height: 75%;
+}
+
+#Right {
+   max-width:50%;
+   min-width:150px;
+   max-height: 75%;
 }
