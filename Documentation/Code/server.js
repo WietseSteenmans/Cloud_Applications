@@ -240,10 +240,30 @@ app.post('/deletecourse', function (req, res) {
 
 
 app.post('/editLes', function(req, res){
+  console.log(req.body);
+  var id = req.body.id;
+  item = {
+    Answer1 : req.body.Answer1,
+    Answer2 : req.body.Answer2,
+    Answer3 : req.body.Answer3,
+    Coursename : req.body.Coursename,
+    Question : req.body.Question,
+    RightAnswer : req.body.RightAnswer
+  };
+
   
     mongo.connect(url, function(err, db) {
     assert.equal(null, err);
-    db.collection('user-data').updateOne({"_id": objectId(id)}, {$set: item}, function(err, result) {
+    db.collection('MultipleChoiceLessen').updateOne({"_id": objectId(id)}, {$set: item}, function(err, result) {
+      assert.equal(null, err);
+      console.log('Item updated');
+      db.close();
+    });
+  });
+
+   mongo.connect(url, function(err, db) {
+    assert.equal(null, err);
+    db.collection('YesNoLessen').updateOne({"_id": objectId(id)}, {$set: item}, function(err, result) {
       assert.equal(null, err);
       console.log('Item updated');
       db.close();
