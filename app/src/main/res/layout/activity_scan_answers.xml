@@ -1,17 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<LinearLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/topLayout"
-    android:orientation="vertical"
+    android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:keepScreenOn="true">
+    android:keepScreenOn="true"
+    android:gravity="center" >
+
+    <!--
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent">
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="This is a test button!"/>
+
+    </RelativeLayout>
+
+    -->
 
     <com.wido.jarjar.camera.CameraSourcePreview
         android:id="@+id/preview"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:gravity="center">
 
         <com.wido.jarjar.camera.GraphicOverlay
             android:id="@+id/faceOverlay"
@@ -20,7 +36,34 @@
 
     </com.wido.jarjar.camera.CameraSourcePreview>
 
-</LinearLayout>
+    <RelativeLayout
+        android:id="@+id/btnContainer"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_centerInParent="true"
+        android:layout_alignParentEnd="true">
+
+        <TextView
+            android:id="@+id/explanationTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Capture the classroom"
+            android:textSize="30dp"
+            android:background="@color/blue2"/>
+
+        <Button
+            android:id="@+id/btnSendResults"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@id/explanationTextView"
+            android:text="Submit"
+            android:textSize="20dp"/>
+
+    </RelativeLayout>
+
+
+</RelativeLayout>
 
 <!--
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
