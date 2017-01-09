@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -82,7 +83,8 @@ public class QuestionActivity extends ActionBarActivity {
 
                  //String urlPost = "http://192.168.1.52:3000/nextQuestion";
                 //String urlPost = "http://10.42.0.1:3000/nextQuestion";
-                String urlPost ="http://10.0.2.2:3000/nextQuestion";
+                //String urlPost ="http://10.0.2.2:3000/nextQuestion";
+                String urlPost = "http://192.168.0.178:3000/nextQuestion";
 
                 final String postData = "true";
 
@@ -93,9 +95,9 @@ public class QuestionActivity extends ActionBarActivity {
                                 try {
                                     JSONObject jsonResponse = new JSONObject(response).getJSONObject("form");
 
-//                                    String site = jsonResponse.getString("site");
-//                                    String network = jsonResponse.getString("network");
-//                                    System.out.println("Site: "+site+"\nNetwork: "+network +"hello");
+                                    String site = jsonResponse.getString("site");
+                                    String network = jsonResponse.getString("network");
+                                    System.out.println("Site: "+site+"\nNetwork: "+network +"hello");
                                 } catch (JSONException e) {
                                     e.printStackTrace();
                                 }
@@ -118,6 +120,8 @@ public class QuestionActivity extends ActionBarActivity {
                         return params;
                     }
                 };
+                //Important, otherwise it will be send multiple times because of timeout!
+                postRequest.setRetryPolicy(new DefaultRetryPolicy(20 * 1000, 0, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
                 Volley.newRequestQueue(QuestionActivity.this).add(postRequest);
             }
         });
@@ -142,7 +146,8 @@ public class QuestionActivity extends ActionBarActivity {
 
                 //String urlPost = "http://192.168.1.52:3000/Results";
                 //String urlPost = "http://10.42.0.1:3000/Results";
-                 String urlPost ="http://10.0.2.2:3000/Results";
+                //String urlPost ="http://10.0.2.2:3000/Results";
+                String urlPost = "http://192.168.0.178:3000/Results";
 
 
                 final String answer1 = "5";
@@ -200,6 +205,8 @@ public class QuestionActivity extends ActionBarActivity {
                         }
                     }
                 };
+                //Important, otherwise it will be send multiple times because of timeout!
+                postRequest.setRetryPolicy(new DefaultRetryPolicy(20 * 1000, 0, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
                 Volley.newRequestQueue(QuestionActivity.this).add(postRequest);
             }
         });
@@ -210,9 +217,10 @@ public class QuestionActivity extends ActionBarActivity {
             @Override
             public void onClick(View view){
                 //Post for results
+                String urlPost = "http://192.168.0.178:3000/CorrectAnswer";
                 //String urlPost = "http://192.168.1.52:3000/CorrectAnswer";
                 //String urlPost = "http://10.42.0.1:3000/CorrectAnswer"; 0.178
-                String urlPost ="http://10.0.2.2:3000/CorrectAnswer";
+                //String urlPost ="http://10.0.2.2:3000/CorrectAnswer";
 
 
                 StringRequest postRequest = new StringRequest(Request.Method.POST, urlPost,
@@ -247,6 +255,8 @@ public class QuestionActivity extends ActionBarActivity {
                         return params;
                     }
                 };
+                //Important, otherwise it will be send multiple times because of timeout!
+                postRequest.setRetryPolicy(new DefaultRetryPolicy(20 * 1000, 0, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
                 Volley.newRequestQueue(QuestionActivity.this).add(postRequest);
             }
         });
