@@ -46,12 +46,12 @@ myApp.controller("QuestionCtrl", function($scope,$http){
   //Clearing Textboxes
   $scope.anotherQuestion = function(){
 
-  document.getElementById('Question').value = "";
-  document.getElementById('Questionyn').value = "";
-  document.getElementById('answerinput1').value = "";
-  document.getElementById('answerinput2').value = "";
-  document.getElementById('answerinput3').value = "";
-  document.getElementById('rightAnswer').value = "";
+  document.getElementById('Question').value = " ";
+  document.getElementById('Questionyn').value = " ";
+  document.getElementById('answerinput1').value = " ";
+  document.getElementById('answerinput2').value = " ";
+  document.getElementById('answerinput3').value = " ";
+  document.getElementById('rightAnswer').value = " ";
 
   }
 
@@ -354,7 +354,6 @@ myApp.controller("Activeles", function($scope,$http){
     document.getElementById('Wrong3').style.border = "none";
     document.getElementById('Right').style.border = "none";
    currentpos += data;
-   currentpos -= 0.5;
    console.log(currentpos);
    console.log($scope.Activelesdata[1].RightAnswer);
    switch($scope.Activelesdata[currentpos].QuestionType){
