@@ -115,6 +115,11 @@ myApp.controller("QuestionCtrl", function($scope,$http){
 
 myApp.controller("LessenController", function($scope,$http){
 
+    var toedit = [];
+
+
+    var RightAnswer = document.getElementById('RightAnswer');
+
   var res = $http.get('http://localhost:3000/GetLessen');
 
   var CourseArray = [];
@@ -198,7 +203,42 @@ myApp.controller("LessenController", function($scope,$http){
     });
   };
 
-  $scope.deletecourse = function(x, array, index){
+
+  $scope.edit = function(array, index){
+    console.log("workz");
+    var Question = document.getElementById('Question' +index);
+    console.log(Question);
+    var RightAnswer = document.getElementById('RightAnswer'+index);
+    console.log(Question.innerHTML);
+    console.log(RightAnswer.innerHTML);
+    //console.log(array[index]);
+    console.log(array[index]._id);
+     var dataObj = {
+      Coursename : array[index].Coursename,
+      Question : Question.innerHTML,
+      Antwoord1 : array[index].Answer1,
+      Antwoord2 : array[index].Answer2,
+      Antwoord3 : array[index].Answer3,
+      RightAnswer : RightAnswer.innerHTML,
+      id : array[index]._id
+     };
+
+     console.log(dataObj);
+
+     var res = $http.post('http://localhost:3000/editLes', dataObj);
+  }
+
+
+   // var Question = document.getElementById('Question');
+   //  console.log(Question);
+   //  Question = addEventListener('blur', function(){
+   //    console.log(this.innerHTML);
+   //    toedit.push(this.innerHTML);
+   //    console.log(toedit);
+   //  });
+
+ 
+    $scope.deletecourse = function(x, array, index){
     console.log(x);
     console.log(array);
     console.log(index);
@@ -253,6 +293,7 @@ myApp.controller("LessenController", function($scope,$http){
   };
 
 });
+
 
 // myApp.service('SharedDataService', function () {
 //       var Course = [];
