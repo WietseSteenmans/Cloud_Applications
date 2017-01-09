@@ -305,30 +305,4 @@ public class QuestionActivity extends ActionBarActivity {
             e.printStackTrace();
         }
     }
-
-    public String checkYesOrNo(){
-        String YesOrNo = "";
-        try {
-            JSONArray response = new JSONArray(readFromFile());
-
-
-
-            for (int i = 0; i < response.length(); i++) {
-                JSONObject jresponse = response.getJSONObject(i);
-
-                String correctAnswer = jresponse.getString("RightAnswer");
-
-
-                if(correctAnswer.equals("Yes") || correctAnswer.equals("No")){
-                    YesOrNo = "true";
-                }else {
-                    YesOrNo = "false";
-                }
-
-            }
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        return YesOrNo;
-    }
 }
