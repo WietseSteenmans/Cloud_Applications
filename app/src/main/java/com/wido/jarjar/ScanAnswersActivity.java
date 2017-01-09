@@ -15,6 +15,8 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
@@ -29,6 +31,8 @@ import com.google.android.gms.vision.face.FaceDetector;
 import com.wido.jarjar.camera.CameraSourcePreview;
 import com.wido.jarjar.camera.GraphicOverlay;
 
+import org.w3c.dom.Text;
+
 import java.io.IOException;
 
 public class ScanAnswersActivity extends AppCompatActivity {
@@ -42,6 +46,17 @@ public class ScanAnswersActivity extends AppCompatActivity {
     private static final int RC_HANDLE_GMS = 9001;
     // permission request codes need to be < 256
     private static final int RC_HANDLE_CAMERA_PERM = 2;
+
+
+    //Counting the answers -- Variables
+    public int counterA = 0;
+    public int counterB = 0;
+    public int counterC = 0;
+    public int counterD = 0;
+    public int counterTotal = 0;
+
+    public TextView scannedBarcodesOnScreen;
+    public Button buttonSubmit;
 
     //==============================================================================================
     // Activity Methods
@@ -58,6 +73,9 @@ public class ScanAnswersActivity extends AppCompatActivity {
         mPreview = (CameraSourcePreview) findViewById(R.id.preview);
         mGraphicOverlay = (GraphicOverlay) findViewById(R.id.faceOverlay);
 
+        buttonSubmit = (Button)findViewById(R.id.btnSendResults);
+        scannedBarcodesOnScreen = (TextView)findViewById(R.id.barcodeCounterTextview);
+
 
         // Check for the camera permission before accessing the camera.  If the
         // permission is not granted yet, request permission.
@@ -67,6 +85,13 @@ public class ScanAnswersActivity extends AppCompatActivity {
         } else {
             requestCameraPermission();
         }
+
+        // Setting variables
+        counterA = 0;
+        counterB = 0;
+        counterC = 0;
+        counterD = 0;
+        counterTotal = 0;
     }
 
     /**
@@ -292,6 +317,8 @@ public class ScanAnswersActivity extends AppCompatActivity {
         @Override
         public void onNewItem(int barcodeId, Barcode item) {
             mBarcodeGraphic.setId(barcodeId);
+            Log.d("BARCODE DETECTED", item.rawValue);
+            barcodeAnswerCounterUp(item.rawValue);
         }
 
         /**
@@ -321,8 +348,70 @@ public class ScanAnswersActivity extends AppCompatActivity {
         @Override
         public void onDone() {
             mOverlay.remove(mBarcodeGraphic);
+            barcodeAnswerCounterDown(mBarcodeGraphic.getBarcode().rawValue);
         }
     }
+
+    // Function that adds value to answercounters
+    private void barcodeAnswerCounterUp(String barcodeValue){
+        switch (barcodeValue){
+            case "Answer A":
+                counterA++;
+                setCounterTextView();
+                break;
+            case "Answer B":
+                counterB++;
+                setCounterTextView();
+                break;
+            case "Answer C":
+                counterC++;
+                setCounterTextView();
+                break;
+            case "Answer D":
+                counterD++;
+                setCounterTextView();
+                break;
+            default:
+                break;
+        }
+    }
+
+    // Function that adds value to answercounters
+    private void barcodeAnswerCounterDown(String barcodeValue){
+        switch (barcodeValue){
+            case "Answer A":
+                counterA--;
+                setCounterTextView();
+                break;
+            case "Answer B":
+                counterB--;
+                setCounterTextView();
+                break;
+            case "Answer C":
+                counterC--;
+                setCounterTextView();
+                break;
+            case "Answer D":
+                counterD--;
+                setCounterTextView();
+                break;
+            default:
+                break;
+        }
+    }
+
+    // Edit Textview
+    private void setCounterTextView(){
+        counterTotal = counterA + counterB + counterC + counterD;
+
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                scannedBarcodesOnScreen.setText("Barcodes Counted: " + counterTotal);
+            }
+        });
+    }
+
 
     /*
     _____________________________________________________
