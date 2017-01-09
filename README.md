@@ -8,3 +8,4 @@ Cloud Applications Project - Teacher Assistant
 
 ## Links naar Relevante Documenten
 - [Project Documentation](https://github.com/WietseSteenmans/Cloud_Applications/blob/master/Documentation/Project%20Documentation.md "Documentatie van het hele project.")
+- [Setup Instructions (Getting Started)](https://github.com/WietseSteenmans/Cloud_Applications/blob/master/Documentation/Setup%20Instructions.md "Setup Instructions.")
