@@ -347,8 +347,9 @@ myApp.controller("Activeles", function($scope,$http){
   });
 
   socket.on('nextQ', function(data){
-   // var ctx = document.getElementById('myChart').getContext('2d');
-   // ctx.clearRect(0, 0, ctx.width, ctx.height);
+    var canvas = document.getElementById('myChart');
+    var context = canvas.getContext('2d');
+    context.clearRect(0, 0, canvas.width, canvas.height);
     document.getElementById('Wrong1').style.border = "none";
     document.getElementById('Wrong2').style.border = "none";
     document.getElementById('Wrong3').style.border = "none";

@@ -93,23 +93,23 @@ label {
 #Wrong1 {
     max-width:50%;
    min-width:150px;
-   max-height: 75%;
+   max-height: 55%;
 }
 
 #Wrong2 {
     max-width:50%;
    min-width:150px;
-   max-height: 75%;
+   max-height: 55%;
 }
 
 #Wrong3 {
     max-width:50%;
    min-width:150px;
-   max-height: 75%;
+   max-height: 55%;
 }
 
 #Right {
    max-width:50%;
    min-width:150px;
-   max-height: 75%;
+   max-height: 55%;
 }
