@@ -9,6 +9,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -62,8 +63,9 @@ public class DisplayQuestionsActivity extends ActionBarActivity {
 
                 //POST test
 
-                String urlPost = "http://192.168.0.178:3000/ActivateLessen";
-                //String urlPost = "http://10.0.2.2:3000/ActivateLessen";
+                //String urlPost = "http://192.168.1.52:3000/ActivateLessen";
+                //String urlPost = "http://192.168.0.178:3000/ActivateLessen";
+                String urlPost = "http://10.0.2.2:3000/ActivateLessen";
 
                 StringRequest postRequest = new StringRequest(Request.Method.POST, urlPost,
                         new Response.Listener<String>() {
@@ -96,6 +98,8 @@ public class DisplayQuestionsActivity extends ActionBarActivity {
                         return params;
                     }
                 };
+                //Important, otherwise it will be send multiple times because of timeout!
+                postRequest.setRetryPolicy(new DefaultRetryPolicy(20 * 1000, 0, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
                 Volley.newRequestQueue(DisplayQuestionsActivity.this).add(postRequest);
             }
         });
