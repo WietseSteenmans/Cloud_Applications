@@ -67,6 +67,7 @@ public class QuestionActivity extends ActionBarActivity {
                 if (questionCounter == data.size()-1)
                 {
                     Toast.makeText(getApplicationContext(), "The End of your Questions", Toast.LENGTH_SHORT).show();
+                    button.setEnabled(false);
                 }
                 if (questionCounter < data.size()-1){
                     questionCounter++;
@@ -83,8 +84,8 @@ public class QuestionActivity extends ActionBarActivity {
 
                  //String urlPost = "http://192.168.1.52:3000/nextQuestion";
                 //String urlPost = "http://10.42.0.1:3000/nextQuestion";
-                String urlPost ="http://10.0.2.2:3000/nextQuestion";
-                //String urlPost = "http://192.168.0.178:3000/nextQuestion";
+                //String urlPost ="http://10.0.2.2:3000/nextQuestion";
+                String urlPost = "http://192.168.0.178:3000/nextQuestion";
 
                 final String postData = "true";
 
@@ -146,8 +147,8 @@ public class QuestionActivity extends ActionBarActivity {
 
                 //String urlPost = "http://192.168.1.52:3000/Results";
                 //String urlPost = "http://10.42.0.1:3000/Results";
-                String urlPost ="http://10.0.2.2:3000/Results";
-                //String urlPost = "http://192.168.0.178:3000/Results";
+                //String urlPost ="http://10.0.2.2:3000/Results";
+                String urlPost = "http://192.168.0.178:3000/Results";
 
 
                 final String answer1 = "5";
@@ -217,10 +218,10 @@ public class QuestionActivity extends ActionBarActivity {
             @Override
             public void onClick(View view){
                 //Post for results
-                //String urlPost = "http://192.168.0.178:3000/CorrectAnswer";
+                String urlPost = "http://192.168.0.178:3000/CorrectAnswer";
                 //String urlPost = "http://192.168.1.52:3000/CorrectAnswer";
                 //String urlPost = "http://10.42.0.1:3000/CorrectAnswer"; 0.178
-                String urlPost ="http://10.0.2.2:3000/CorrectAnswer";
+                //String urlPost ="http://10.0.2.2:3000/CorrectAnswer";
 
 
                 StringRequest postRequest = new StringRequest(Request.Method.POST, urlPost,
