@@ -34,6 +34,8 @@ public class QuestionActivity extends ActionBarActivity {
     private TextView QuestionView;
     private TextView AnswerView;
 
+    //public final static String EXTRA_MESSAGE = "com.example.myfirstapp.MESSAGE";
+
     int questionCounter = 0;
 
     ArrayList<String> data = new ArrayList<String>();
@@ -131,8 +133,11 @@ public class QuestionActivity extends ActionBarActivity {
         scanAnswersBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                final TextView answerView = (TextView) findViewById(R.id.answerView);
+                String contextAnswer = answerView.getText().toString();
                 //Intent
                 Intent intentScanAnswers = new Intent(QuestionActivity.this, ScanAnswersActivity.class);
+                intentScanAnswers.putExtra("ContextAnswer", contextAnswer);
                 startActivity(intentScanAnswers);
             }
         });
