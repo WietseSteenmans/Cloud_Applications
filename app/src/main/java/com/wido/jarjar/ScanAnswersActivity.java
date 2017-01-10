@@ -6,6 +6,7 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.hardware.Camera;
 import android.os.Build;
@@ -147,9 +148,12 @@ public class ScanAnswersActivity extends AppCompatActivity {
                     @Override
                     protected Map<String, String> getParams()
                     {
-                        final TextView answerView = (TextView) findViewById(R.id.answerView);
+                        Intent intent = getIntent();
+                        Bundle mBundle = intent.getExtras();
+                        String contextAnswer = (String)mBundle.get("ContextAnswer");
 
-                        String contextAnswer = answerView.getText().toString();
+                        //final TextView answerView = (TextView) findViewById(R.id.answerView);
+                        //String contextAnswer = answerView.getText().toString();
                         if (contextAnswer.equals("Yes") || contextAnswer.equals("No"))
                         {
                             Map<String, String> params = new HashMap<>();
