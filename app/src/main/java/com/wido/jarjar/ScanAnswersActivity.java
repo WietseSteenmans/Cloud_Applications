@@ -442,7 +442,23 @@ public class ScanAnswersActivity extends AppCompatActivity {
                 counterA++;
                 setCounterTextView();
                 break;
+            case "Answer A1":
+                counterA++;
+                setCounterTextView();
+                break;
+            case "Answer A2":
+                counterA++;
+                setCounterTextView();
+                break;
             case "Answer B":
+                counterB++;
+                setCounterTextView();
+                break;
+            case "Answer B1":
+                counterB++;
+                setCounterTextView();
+                break;
+            case "Answer B2":
                 counterB++;
                 setCounterTextView();
                 break;
@@ -450,7 +466,23 @@ public class ScanAnswersActivity extends AppCompatActivity {
                 counterC++;
                 setCounterTextView();
                 break;
+            case "Answer C1":
+                counterC++;
+                setCounterTextView();
+                break;
+            case "Answer C2":
+                counterC++;
+                setCounterTextView();
+                break;
             case "Answer D":
+                counterD++;
+                setCounterTextView();
+                break;
+            case "Answer D1":
+                counterD++;
+                setCounterTextView();
+                break;
+            case "Answer D2":
                 counterD++;
                 setCounterTextView();
                 break;
@@ -466,7 +498,23 @@ public class ScanAnswersActivity extends AppCompatActivity {
                 counterA--;
                 setCounterTextView();
                 break;
+            case "Answer A1":
+                counterA--;
+                setCounterTextView();
+                break;
+            case "Answer A2":
+                counterA--;
+                setCounterTextView();
+                break;
             case "Answer B":
+                counterB--;
+                setCounterTextView();
+                break;
+            case "Answer B1":
+                counterB--;
+                setCounterTextView();
+                break;
+            case "Answer B2":
                 counterB--;
                 setCounterTextView();
                 break;
@@ -474,7 +522,23 @@ public class ScanAnswersActivity extends AppCompatActivity {
                 counterC--;
                 setCounterTextView();
                 break;
+            case "Answer C1":
+                counterC--;
+                setCounterTextView();
+                break;
+            case "Answer C2":
+                counterC--;
+                setCounterTextView();
+                break;
             case "Answer D":
+                counterD--;
+                setCounterTextView();
+                break;
+            case "Answer D1":
+                counterD--;
+                setCounterTextView();
+                break;
+            case "Answer D2":
                 counterD--;
                 setCounterTextView();
                 break;
