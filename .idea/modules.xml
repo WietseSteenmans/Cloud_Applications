@@ -2,8 +2,12 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+<<<<<<< HEAD
+      <module fileurl="file://$PROJECT_DIR$/Cloud_Applications.iml" filepath="$PROJECT_DIR$/Cloud_Applications.iml" />
+=======
       <module fileurl="file://$PROJECT_DIR$/Cloud_Applications-master.iml" filepath="$PROJECT_DIR$/Cloud_Applications-master.iml" />
       <module fileurl="file://$PROJECT_DIR$/JarJar.iml" filepath="$PROJECT_DIR$/JarJar.iml" />
+>>>>>>> ae08c069410b1b3eb3f6514f5d36e909ccd85dea
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>

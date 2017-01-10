@@ -20,6 +20,7 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true" />
 
+    <!--
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -28,12 +29,15 @@
         android:layout_below="@+id/correctAnswerBtn"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true" />
+
+    -->
+
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Go To The Next Question"
         android:id="@+id/nextQuestionBtn"
-        android:layout_below="@+id/statButton"
+        android:layout_below="@+id/correctAnswerBtn"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true" />
 

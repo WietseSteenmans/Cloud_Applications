@@ -15,7 +15,14 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
 
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
 import com.google.android.gms.vision.CameraSource;
@@ -29,7 +36,13 @@ import com.google.android.gms.vision.face.FaceDetector;
 import com.wido.jarjar.camera.CameraSourcePreview;
 import com.wido.jarjar.camera.GraphicOverlay;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+import org.w3c.dom.Text;
+
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 public class ScanAnswersActivity extends AppCompatActivity {
     private static final String TAG = "FaceTracker";
@@ -42,6 +55,17 @@ public class ScanAnswersActivity extends AppCompatActivity {
     private static final int RC_HANDLE_GMS = 9001;
     // permission request codes need to be < 256
     private static final int RC_HANDLE_CAMERA_PERM = 2;
+
+
+    //Counting the answers -- Variables
+    public int counterA = 0;
+    public int counterB = 0;
+    public int counterC = 0;
+    public int counterD = 0;
+    public int counterTotal = 0;
+
+    public TextView scannedBarcodesOnScreen;
+    public Button buttonSubmit;
 
     //==============================================================================================
     // Activity Methods
@@ -58,6 +82,9 @@ public class ScanAnswersActivity extends AppCompatActivity {
         mPreview = (CameraSourcePreview) findViewById(R.id.preview);
         mGraphicOverlay = (GraphicOverlay) findViewById(R.id.faceOverlay);
 
+        buttonSubmit = (Button)findViewById(R.id.btnSendResults);
+        scannedBarcodesOnScreen = (TextView)findViewById(R.id.barcodeCounterTextview);
+
 
         // Check for the camera permission before accessing the camera.  If the
         // permission is not granted yet, request permission.
@@ -67,6 +94,83 @@ public class ScanAnswersActivity extends AppCompatActivity {
         } else {
             requestCameraPermission();
         }
+
+        // Setting variables
+        counterA = 0;
+        counterB = 0;
+        counterC = 0;
+        counterD = 0;
+        counterTotal = 0;
+
+
+        //Button Send all the results
+        final Button sendResultsBtn = (Button) findViewById(R.id.btnSendResults);
+        sendResultsBtn.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view){
+                //Post for results
+
+                String urlPost = "http://192.168.0.178:3000/Results";
+                //String urlPost = "http://10.42.0.1:3000/Results";
+
+                final String answer1 = String.valueOf(counterA);
+                final String answer2 = String.valueOf(counterB);
+                final String answer3 = String.valueOf(counterC);
+                final String rightAnswer = String.valueOf(counterD);
+
+                final String noAnswer = String.valueOf(counterB);
+                final String yesAnswer = String.valueOf(counterA);
+
+                StringRequest postRequest = new StringRequest(Request.Method.POST, urlPost,
+                        new Response.Listener<String>() {
+                            @Override
+                            public void onResponse(String response) {
+                                try {
+                                    JSONObject jsonResponse = new JSONObject(response).getJSONObject("form");
+
+//                                    String site = jsonResponse.getString("site");
+//                                    String network = jsonResponse.getString("network");
+//                                    System.out.println("Site: "+site+"\nNetwork: "+network +"hello");
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        },
+                        new Response.ErrorListener() {
+                            @Override
+                            public void onErrorResponse(VolleyError error) {
+                                error.printStackTrace();
+                            }
+                        }
+                ) {
+
+                    @Override
+                    protected Map<String, String> getParams()
+                    {
+                        final TextView answerView = (TextView) findViewById(R.id.answerView);
+
+                        String contextAnswer = answerView.getText().toString();
+                        if (contextAnswer.equals("Yes") || contextAnswer.equals("No"))
+                        {
+                            Map<String, String> params = new HashMap<>();
+                            params.put("No", noAnswer);
+                            params.put("Yes", yesAnswer);
+                            return params;
+                        }else
+                        {
+                            Map<String, String> params = new HashMap<>();
+                            // the POST parameters:
+                            params.put("Answer1", answer1);
+                            params.put("Answer2", answer2);
+                            params.put("Answer3", answer3);
+                            params.put("RightAnswer", rightAnswer);
+                            return params;
+                        }
+                    }
+                };
+                Volley.newRequestQueue(ScanAnswersActivity.this).add(postRequest);
+            }
+        });
     }
 
     /**
@@ -292,6 +396,8 @@ public class ScanAnswersActivity extends AppCompatActivity {
         @Override
         public void onNewItem(int barcodeId, Barcode item) {
             mBarcodeGraphic.setId(barcodeId);
+            Log.d("BARCODE DETECTED", item.rawValue);
+            barcodeAnswerCounterUp(item.rawValue);
         }
 
         /**
@@ -321,7 +427,68 @@ public class ScanAnswersActivity extends AppCompatActivity {
         @Override
         public void onDone() {
             mOverlay.remove(mBarcodeGraphic);
+            barcodeAnswerCounterDown(mBarcodeGraphic.getBarcode().rawValue);
         }
+    }
+
+    // Function that adds value to answercounters
+    private void barcodeAnswerCounterUp(String barcodeValue){
+        switch (barcodeValue){
+            case "Answer A":
+                counterA++;
+                setCounterTextView();
+                break;
+            case "Answer B":
+                counterB++;
+                setCounterTextView();
+                break;
+            case "Answer C":
+                counterC++;
+                setCounterTextView();
+                break;
+            case "Answer D":
+                counterD++;
+                setCounterTextView();
+                break;
+            default:
+                break;
+        }
+    }
+
+    // Function that adds value to answercounters
+    private void barcodeAnswerCounterDown(String barcodeValue){
+        switch (barcodeValue){
+            case "Answer A":
+                counterA--;
+                setCounterTextView();
+                break;
+            case "Answer B":
+                counterB--;
+                setCounterTextView();
+                break;
+            case "Answer C":
+                counterC--;
+                setCounterTextView();
+                break;
+            case "Answer D":
+                counterD--;
+                setCounterTextView();
+                break;
+            default:
+                break;
+        }
+    }
+
+    // Edit Textview
+    private void setCounterTextView(){
+        counterTotal = counterA + counterB + counterC + counterD;
+
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                scannedBarcodesOnScreen.setText("Barcodes Counted: " + counterTotal);
+            }
+        });
     }
 
     /*
